@@ -4,6 +4,8 @@ import NavBar from './components/NavBar';
 import styles from './App.module.css';
 import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
+import './api/axiosDefaults'
+import SignUpForm from './pages/auth/SignUp';
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
           <Route exact path="/blog" element={<h1>Blog</h1>} />
           <Route exact path="/contact" element={<h1>Contact</h1>} />
           <Route exact path="/signin" element={<h1>Sign in</h1>} />
-          <Route exact path="/signup" element={<h1>Sign up</h1>} />
+          <Route exact path="/signup" element={<SignUpForm/>} />
           <Route element={() => <p>Page not found!</p>} />
         </Routes>
       </Container>
