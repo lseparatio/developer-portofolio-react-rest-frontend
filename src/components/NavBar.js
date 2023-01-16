@@ -5,9 +5,22 @@ import Navbar from 'react-bootstrap/Navbar';
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from "react-router-dom";
 
+import { useCurrentUser } from '../contexts/CurrentUserContext';
+
 
 
 const NavBar = () => {
+  const currentUser = useCurrentUser();
+
+  const loggedInIcons = <>{currentUser?.username}</>;
+
+  const loggedOutIcons = (
+    <>
+      <NavLink exact="true" className="nav-link" to="/signin">Sign In</NavLink>
+      <NavLink exact="true" className="nav-link" to="/signup">Sign Up</NavLink>
+    </>
+  )
+
   return (
     <Navbar className={styles.NavBar} expand="md" fixed='top'>
       <Container>
@@ -23,8 +36,7 @@ const NavBar = () => {
             <NavLink exact="true" className="nav-link" to="/projects">Projects</NavLink>
             <NavLink exact="true" className="nav-link" to="/blog">Blog</NavLink>
             <NavLink exact="true" className="nav-link" to="/contact">Contact</NavLink>
-            <NavLink exact="true" className="nav-link" to="/signin">Sign In</NavLink>
-            <NavLink exact="true" className="nav-link" to="/signup">Sign Up</NavLink>
+            {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
       </Container>

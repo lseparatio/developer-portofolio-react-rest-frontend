@@ -5,10 +5,15 @@ import styles from './App.module.css';
 import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
 import './api/axiosDefaults'
-import SignUpForm from './pages/auth/SignUp';
+import SignInForm from './pages/auth/SignInForm';
+import SignUpForm from './pages/auth/SignUpForm';
+
+
 
 function App() {
+
   return (
+
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
@@ -18,12 +23,13 @@ function App() {
           <Route exact path="/projects" element={<h1>Projects</h1>} />
           <Route exact path="/blog" element={<h1>Blog</h1>} />
           <Route exact path="/contact" element={<h1>Contact</h1>} />
-          <Route exact path="/signin" element={<h1>Sign in</h1>} />
-          <Route exact path="/signup" element={<SignUpForm/>} />
+          <Route exact path="/signin" element={<SignInForm />} />
+          <Route exact path="/signup" element={<SignUpForm />} />
           <Route element={() => <p>Page not found!</p>} />
         </Routes>
       </Container>
     </div>
+
   );
 }
 
