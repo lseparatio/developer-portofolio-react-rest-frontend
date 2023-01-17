@@ -5,14 +5,31 @@ import Navbar from 'react-bootstrap/Navbar';
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from "react-router-dom";
 
-import { useCurrentUser } from '../contexts/CurrentUserContext';
+
+import { useCurrentUser, useSetCurrentUser, } from '../contexts/CurrentUserContext';
+import Avatar from './Avatar';
+import axios from "axios";
+
 
 
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
 
-  const loggedInIcons = <>{currentUser?.username}</>;
+  const handleSignOut = async () => {
+    try {
+      await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loggedInIcons = <>
+    <NavLink className="nav-link" to={`/profiles/${currentUser?.profile_id}`}><Avatar src={`https://api.ionutzapototchi.com${currentUser?.profile_image}`} text="Profile" height={40} /></NavLink>
+    <NavLink className="nav-link" to="/" onClick={handleSignOut}>Sign Out</NavLink>
+  </>;
 
   const loggedOutIcons = (
     <>

@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import './api/axiosDefaults'
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
+import NotFound from './components/NotFound';
 
 
 
@@ -25,7 +26,8 @@ function App() {
           <Route exact path="/contact" element={<h1>Contact</h1>} />
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
-          <Route element={() => <p>Page not found!</p>} />
+          {/* 404 rounte */}
+          <Route path='*' element={<NotFound />}/>
         </Routes>
       </Container>
     </div>
