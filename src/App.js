@@ -10,7 +10,6 @@ import SignUpForm from './pages/auth/SignUpForm';
 import NotFound from './components/NotFound';
 
 
-
 function App() {
 
   return (
@@ -27,7 +26,7 @@ function App() {
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
           {/* 404 rounte */}
-          <Route path='*' element={<NotFound />}/>
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Container>
     </div>
