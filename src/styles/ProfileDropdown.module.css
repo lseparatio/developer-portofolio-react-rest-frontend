@@ -1,0 +1,14 @@
+.ProfileDropdown {
+    height: 30px;
+    object-fit: cover;
+}
+
+.ProfileButtonDropdown {
+    height: 40px;
+    background-color: pink;
+}
+
+.iconStyle {
+    color: blue;
+    background-color: blue;
+}

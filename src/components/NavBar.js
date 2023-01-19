@@ -6,51 +6,47 @@ import styles from '../styles/NavBar.module.css'
 import { NavLink } from "react-router-dom";
 
 
-import { useCurrentUser, useSetCurrentUser, } from '../contexts/CurrentUserContext';
+import { useCurrentUser, } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
-import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import ProfileDropdown from './ProfileDropdown';
 
 
 
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
-  const setCurrentUser = useSetCurrentUser();
+
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
-  const handleSignOut = async () => {
-    try {
-      await axios.post("dj-rest-auth/logout/");
-      setCurrentUser(null);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
-  const loggedInIcons = <>
-    <NavLink className="nav-link" to={`/profiles/${currentUser?.profile_id}`}>
-      <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} text="Profile" height={40} /></NavLink>
-    <NavLink className="nav-link" to="/" onClick={handleSignOut}>Sign Out</NavLink>
-  </>;
+  const loggedInIcons = (
+    <>
+      <NavLink className="nav-link" to={`/profiles/${currentUser?.profile_id}`}></NavLink>
+      <NavLink> <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} height={40} /></NavLink>
+      <ProfileDropdown />
+
+    </>
+  );
 
   const loggedOutIcons = (
     <>
       <NavLink exact="true" className="nav-link" to="/signin">Sign In</NavLink>
       <NavLink exact="true" className="nav-link" to="/signup">Sign Up</NavLink>
     </>
-  )
+  );
 
   return (
     <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed='top'>
-      <Container>
+      <Container >
         <NavLink exact="true" className="nav-link" to="/">
           <Navbar.Brand>Ionut Zapototchi</Navbar.Brand>
         </NavLink>
 
         <Navbar.Toggle ref={ref}
           onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto text-center">
             <NavLink exact="true" className="nav-link" to="/">Home</NavLink>

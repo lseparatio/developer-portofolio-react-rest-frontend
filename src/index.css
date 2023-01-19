@@ -16,3 +16,7 @@ code {
 .navbar-nav .show>.nav-link {
   color: blue;
 }
+
+#settings-dropdown::after {
+  display: none;
+}
