@@ -2,9 +2,11 @@ import React from 'react'
 import axios from "axios";
 import { useSetCurrentUser, } from '../contexts/CurrentUserContext';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useCurrentUser, } from '../contexts/CurrentUserContext';
+import { Link } from 'react-router-dom';
 
 function ProfileDropdown() {
-
+    const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
 
     const handleSignOut = async () => {
@@ -20,13 +22,17 @@ function ProfileDropdown() {
 
     return (
         <NavDropdown title={navDropdownTitle} id="settings-dropdown" align="end">
-            <NavDropdown.Item className="text-center" href="#action/3.1">Profile</NavDropdown.Item>
+            <NavDropdown.Item as={Link} className="text-center" to={`/profiles/${currentUser?.username}`}>
+                Profile
+            </NavDropdown.Item>
             <NavDropdown.Item className="text-center" href="#action/3.2">
+                Projects
+            </NavDropdown.Item>
+            <NavDropdown.Item className="text-center" href="#action/3.3">
                 Orders
             </NavDropdown.Item>
-            <NavDropdown.Item className="text-center" href="#action/3.3">Projects</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item className="text-center" onClick={handleSignOut}>
+            <NavDropdown.Item as={Link} to={'/'} className="text-center" onClick={handleSignOut}>
                 Sign Out
             </NavDropdown.Item>
         </NavDropdown>
