@@ -23,10 +23,8 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      <NavLink className="nav-link" to={`/profiles/${currentUser?.profile_id}`}></NavLink>
-      <NavLink> <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} height={35} /></NavLink>
+      <NavLink to={`/profiles/${currentUser?.username}`}> <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} height={35} /></NavLink>
       <ProfileDropdown />
-
     </>
   );
 
