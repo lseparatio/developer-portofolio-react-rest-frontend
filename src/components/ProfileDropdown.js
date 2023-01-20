@@ -20,13 +20,13 @@ function ProfileDropdown() {
 
     return (
         <NavDropdown title={navDropdownTitle} id="settings-dropdown" align="end">
-            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
+            <NavDropdown.Item className="text-center" href="#action/3.1">Profile</NavDropdown.Item>
+            <NavDropdown.Item className="text-center" href="#action/3.2">
                 Orders
             </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Projects</NavDropdown.Item>
+            <NavDropdown.Item className="text-center" href="#action/3.3">Projects</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item onClick={handleSignOut}>
+            <NavDropdown.Item className="text-center" onClick={handleSignOut}>
                 Sign Out
             </NavDropdown.Item>
         </NavDropdown>
