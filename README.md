@@ -1,3 +1,10 @@
+# React Frontend for Django Backend developer-portofolio
+
+Link to backend repo:  [Developer portfolio and freelance site!](https://github.com/lseparatio/developer-portofolio-django-rest-backend)
+
+To connect frontend to backend please rename env_example.py to env.py and update your backend link location.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
