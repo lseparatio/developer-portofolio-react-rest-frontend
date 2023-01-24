@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useCurrentUser, } from '../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';
 
+
 function ProfileDropdown() {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
@@ -22,7 +23,7 @@ function ProfileDropdown() {
 
     return (
         <NavDropdown title={navDropdownTitle} id="settings-dropdown" align="end">
-            <NavDropdown.Item as={Link} className="text-center" to={`/profiles/${currentUser?.username}`}>
+            <NavDropdown.Item as={Link} className="text-center" to={`/profile/${currentUser?.username}`}>
                 Profile
             </NavDropdown.Item>
             <NavDropdown.Item className="text-center" href="#action/3.2">

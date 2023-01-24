@@ -14,7 +14,13 @@ code {
 
 .navbar-nav .nav-link.active,
 .navbar-nav .show>.nav-link {
-  color: blue;
+  color: rgb(5, 5, 7);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.nav-link {
+  color: rgb(5, 5, 7);
 }
 
 #settings-dropdown::after {

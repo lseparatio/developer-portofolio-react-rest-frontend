@@ -10,6 +10,7 @@ import { useCurrentUser, } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import ProfileDropdown from './ProfileDropdown';
+import ProfileDisplay from '../pages/profile/ProfileDisplay';
 
 
 
@@ -23,7 +24,7 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      <NavLink to={`/profiles/${currentUser?.username}`}> <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} height={35} /></NavLink>
+      <NavLink to={`/profile/${currentUser?.username}`} element={<ProfileDisplay />}> <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} height={35} /></NavLink>
       <ProfileDropdown />
     </>
   );

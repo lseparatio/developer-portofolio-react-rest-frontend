@@ -8,6 +8,7 @@ import './api/axiosDefaults'
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import NotFound from './components/NotFound';
+import ProfileDisplay from './pages/profile/ProfileDisplay';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/contact" element={<h1>Contact</h1>} />
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
+          <Route exact path="/profile/:id" element={<ProfileDisplay />} />
           {/* 404 rounte */}
           <Route path='*' element={<NotFound />} />
         </Routes>

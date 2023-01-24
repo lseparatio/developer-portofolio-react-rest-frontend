@@ -10,10 +10,12 @@ const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
         username: "",
         email: "",
+        first_name: "",
+        last_name: "",
         password1: "",
         password2: "",
     });
-    const { username, email, password1, password2, } = signUpData;
+    const { username, email, first_name, last_name, password1, password2, } = signUpData;
 
     const [errors, setErrors] = useState({});
 
@@ -43,6 +45,26 @@ const SignUpForm = () => {
                 <Form.Control type="text" placeholder="Username" name='username' value={username} onChange={handleChange} />
             </Form.Group>
             {errors.username?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
+
+            <Form.Group className="mb-3" controlId="first_name">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="text" placeholder="First Name" name='first_name' value={first_name} onChange={handleChange} />
+            </Form.Group>
+            {errors.first_name?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
+
+            <Form.Group className="mb-3" controlId="last_name">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control type="text" placeholder="Last Name" name='last_name' value={last_name} onChange={handleChange} />
+            </Form.Group>
+            {errors.last_name?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
