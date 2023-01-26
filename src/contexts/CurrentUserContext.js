@@ -3,8 +3,8 @@ import axios from 'axios';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useNavigate } from 'react-router-dom';
 
-export const CurrentUserContext = createContext();
-export const SetCurrentUserContext = createContext();
+const CurrentUserContext = createContext();
+const SetCurrentUserContext = createContext();
 
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
