@@ -7,10 +7,12 @@ import Alert from 'react-bootstrap/Alert'
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { Col, Container, Row, Image } from 'react-bootstrap';
 import loginImage from "../../assets/img/login.webp"
+import styles from "../../styles/SignIn.module.css";
 
 
 
 const SignInForm = () => {
+
     const setCurrentUser = useSetCurrentUser();
     const [signInData, setSignInData] = useState({
         email: "",
@@ -34,7 +36,7 @@ const SignInForm = () => {
         try {
             const { data } = await axios.post("dj-rest-auth/login/", signInData);
             setCurrentUser(data.user);
-            navigate("/");
+            navigate(`/profile/${data.user.username}`);
         } catch (err) {
             setErrors(err.response?.data);
         }
@@ -50,7 +52,7 @@ const SignInForm = () => {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-4" controlId="email">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name='email' value={email} onChange={handleChange} />
+                            <Form.Control type="email" placeholder="Enter email" name='email' value={email} onChange={handleChange} className={styles.Input} />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -63,7 +65,7 @@ const SignInForm = () => {
 
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name='password' value={password} onChange={handleChange} />
+                            <Form.Control type="password" placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.password1?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
@@ -71,10 +73,6 @@ const SignInForm = () => {
                             </Alert>
                         ))}
 
-
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
                         <div className="d-grid gap-2">
                             <Button variant="secondary" size="lg" type="submit">
                                 Log In
