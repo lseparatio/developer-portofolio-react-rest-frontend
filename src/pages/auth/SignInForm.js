@@ -21,6 +21,7 @@ const SignInForm = () => {
     const { email, password, } = signInData;
 
     const [errors, setErrors] = useState({});
+    const [revealed, setRevealed] = useState(false);
 
     const navigate = useNavigate();
 
@@ -30,6 +31,10 @@ const SignInForm = () => {
             [event.target.name]: event.target.value,
         });
     };
+
+    const handleReveal = () => {
+        setRevealed(!revealed)
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -51,11 +56,8 @@ const SignInForm = () => {
                 <Col md={6} className="d-flex align-items-center justify-content-center">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-4" controlId="email">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name='email' value={email} onChange={handleChange} className={styles.Input} />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter Email" name='email' value={email} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.email?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
@@ -65,13 +67,17 @@ const SignInForm = () => {
 
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
+                            <Form.Control type={(revealed) ? "text" : "password"} placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.password1?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
+
+                        <Form.Group className='mb-3' controlId="signInCheckbox">
+                            <Form.Check type="checkbox" label="Show Password" onClick={handleReveal} />
+                        </Form.Group>
 
                         <div className="d-grid gap-2">
                             <Button variant="secondary" size="lg" type="submit">

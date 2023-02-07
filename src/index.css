@@ -25,3 +25,14 @@ code {
 #settings-dropdown::after {
   display: none;
 }
+
+input#signInCheckbox.form-check-input:checked {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  box-shadow: none;
+}
+
+input#signInCheckbox.form-check-input:focus {
+  border-color: #6c757d;
+  box-shadow: none;
+}
