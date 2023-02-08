@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+    monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,13 +25,15 @@ code {
   display: none;
 }
 
-input#signInCheckbox.form-check-input:checked {
+input#signInCheckbox.form-check-input:checked,
+input#signUpCheckbox.form-check-input:checked {
   background-color: #6c757d;
   border-color: #6c757d;
   box-shadow: none;
 }
 
-input#signInCheckbox.form-check-input:focus {
+input#signInCheckbox.form-check-input:focus,
+input#signUpCheckbox.form-check-input:focus {
   border-color: #6c757d;
   box-shadow: none;
 }

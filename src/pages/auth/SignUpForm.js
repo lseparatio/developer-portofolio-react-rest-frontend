@@ -19,6 +19,7 @@ const SignUpForm = () => {
     const { username, email, first_name, last_name, password1, password2, } = signUpData;
 
     const [errors, setErrors] = useState({});
+    const [revealed, setRevealed] = useState(false);
 
     const navigate = useNavigate();
 
@@ -28,6 +29,10 @@ const SignUpForm = () => {
             [event.target.name]: event.target.value,
         });
     };
+
+    const handleReveal = () => {
+        setRevealed(!revealed)
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -92,7 +97,10 @@ const SignUpForm = () => {
 
                         <Form.Group className="mb-3" controlId="password1">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name='password1' value={password1} onChange={handleChange} className={styles.Input} />
+                            <Form.Control type={(revealed) ? "text" : "password"} placeholder="Password" name='password1' value={password1} onChange={handleChange} className={styles.Input} />
+                        </Form.Group>
+                        <Form.Group className='mb-3' controlId="signUpCheckbox">
+                            <Form.Check type="checkbox" label="Show Passwords" onClick={handleReveal} />
                         </Form.Group>
                         {errors.password1?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
@@ -102,7 +110,7 @@ const SignUpForm = () => {
 
                         <Form.Group className="mb-3" controlId="password2">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm Password" name='password2' value={password2} onChange={handleChange} className={styles.Input} />
+                            <Form.Control type={(revealed) ? "text" : "password"} placeholder="Confirm Password" name='password2' value={password2} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.password2?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
