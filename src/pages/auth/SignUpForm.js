@@ -119,7 +119,7 @@ const SignUpForm = () => {
                         ))}
 
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label={<>Agree <a href='https://google.com' target='_blank'> TOS & Privacy </a></>} required/>
+                            <Form.Check type="checkbox" label={<>Agree <a href='https://google.com' target='_blank' rel='noreferrer'> TOS & Privacy </a></>} required/>
                         </Form.Group>
                         <div className="d-grid gap-2">
                             <Button variant="secondary" type="submit">

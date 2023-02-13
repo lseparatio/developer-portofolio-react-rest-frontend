@@ -1,13 +1,15 @@
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { useProfileData } from "../../contexts/ProfileDataContext";
+import NotFound from '../../components/NotFound';
 
 function ProfileDisplay() {
   const currentUser = useCurrentUser();
 
   const currentProfile = useProfileData();
 
+  const loggedOutComponents = (<NotFound />)
 
-  return (
+  const loggedInComponents = (
     <>
       <div>{currentUser?.pk}</div>
       <div>{currentUser?.username}</div>
@@ -17,7 +19,12 @@ function ProfileDisplay() {
       <div>{currentUser?.profile_id}</div>
       <div>{currentProfile?.birth_date}</div>
       <div>{currentProfile?.street_address1}</div>
+    </>
+  )
 
+  return (
+    <>
+      {currentUser ? loggedInComponents : loggedOutComponents}
     </>
   )
 }

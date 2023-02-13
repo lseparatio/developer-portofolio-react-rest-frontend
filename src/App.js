@@ -9,6 +9,7 @@ import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import NotFound from './components/NotFound';
 import ProfileDisplay from './pages/profile/ProfileDisplay';
+import ProfileUpdate from './pages/profile/ProfileUpdate';
 
 
 function App() {
@@ -27,8 +28,9 @@ function App() {
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
           <Route exact path="/profile/:id" element={<ProfileDisplay />} />
+          <Route exact path="/profile/update/:id" element={<ProfileUpdate />} />
           {/* 404 rounte */}
-          <Route path='*' element={<NotFound />} />
+          <Route exact path='*' element={<NotFound />} />
         </Routes>
       </Container>
     </div>
