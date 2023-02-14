@@ -6,6 +6,7 @@ import { useCurrentUser } from './CurrentUserContext';
 const ProfileDataContext = createContext();
 const SetProfileDataContext = createContext();
 
+
 export const useProfileData = () => useContext(ProfileDataContext);
 export const useSetProfileData = () => useContext(SetProfileDataContext);
 
@@ -21,13 +22,12 @@ export const ProfileDataProvider = ({ children }) => {
                 const { data } = await axiosReq.get(`/profiles/${currentUser?.profile_id}/`);
                 setProfileData(data);
             } catch (err) {
-                console.log(err);
+                //console.log(err);
             }
         };
         handleMount();
     }, [currentUser]);
 
-    console.log(profileData)
     return (
         <ProfileDataContext.Provider value={profileData}>
             <SetProfileDataContext.Provider value={setProfileData}>

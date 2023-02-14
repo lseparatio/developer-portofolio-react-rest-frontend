@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Container, Row, Image, Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { axiosReq } from "../api/axiosDefaults";
 import styles from "../styles/ProfileUpdateForm.module.css"
@@ -10,10 +10,10 @@ import { useProfileData } from '../contexts/ProfileDataContext';
 const ProfileUpdateForm = () => {
   const currentUser = useCurrentUser();
   const profileDatas = useProfileData();
-  const { id } = useParams();
+
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
 
   const [profileData, setProfileData,] = useState({
     user: "",
@@ -31,22 +31,22 @@ const ProfileUpdateForm = () => {
 
   useEffect(() => {
     const handleMount = async () => {
-      if (currentUser?.profile_id?.toString() === id) {
+      if (currentUser?.profile_id?.toString() === profileDatas?.id?.toString()) {
+
         try {
-          const { data } = await axiosReq.get(`/profiles/${id}/`);
+          const { data } = await axiosReq.get(`/profiles/${profileDatas?.id?.toString()}/`);
           const { birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, } = data;
           setProfileData({ birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, });
         } catch (err) {
-          // console.log(err);
-
+          console.log(err);
         }
       } else {
-
+        <Navigate to="*" replace={true} />
       }
     };
 
     handleMount();
-  }, [currentUser, profileDatas, id]);
+  }, [currentUser, profileDatas,]);
 
 
   const handleChange = (event) => {
@@ -59,7 +59,7 @@ const ProfileUpdateForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`profiles/${currentUser?.pk}/`, profileData);
+      await axios.patch(`profiles/${currentUser?.profile_id}/`, profileData);
       navigate(`/profile/${currentUser?.username}`);
     } catch (err) {
       setErrors(err.response?.data);
@@ -77,7 +77,7 @@ const ProfileUpdateForm = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="birth_date">
               <Form.Label>Date of Birth</Form.Label>
-              <Form.Control type="phone" placeholder="Date of Birth" name='birth_date' value={birth_date} onChange={handleChange} className={styles.Input} />
+              <Form.Control type="date" placeholder="Date of Birth" name='birth_date' value={birth_date} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.birth_date?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
@@ -156,12 +156,9 @@ const ProfileUpdateForm = () => {
               </Alert>
             ))}
 
-
-
-
             <div className="d-grid gap-2">
               <Button variant="secondary" type="submit">
-                Sign Up
+                Update
               </Button>
             </div>
             {errors.non_field_errors?.map((message, idx) => (

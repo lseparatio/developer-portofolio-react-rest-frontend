@@ -19,6 +19,7 @@ function ProfileDisplay() {
       <div>{currentUser?.profile_id}</div>
       <div>{currentProfile?.birth_date}</div>
       <div>{currentProfile?.street_address1}</div>
+      <div>{currentProfile?.street_address2}</div>
     </>
   )
 

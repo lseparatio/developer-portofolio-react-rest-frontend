@@ -10,10 +10,13 @@ import SignUpForm from './pages/auth/SignUpForm';
 import NotFound from './components/NotFound';
 import ProfileDisplay from './pages/profile/ProfileDisplay';
 import ProfileUpdate from './pages/profile/ProfileUpdate';
+import { useCurrentUser } from './contexts/CurrentUserContext';
 
 
 function App() {
-
+  const currentUser = useCurrentUser();
+  const id = currentUser?.profile_id?.toString();
+  const username = currentUser?.username?.toString();
   return (
 
     <div className={styles.App}>
@@ -27,8 +30,8 @@ function App() {
           <Route exact path="/contact" element={<h1>Contact</h1>} />
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
-          <Route exact path="/profile/:id" element={<ProfileDisplay />} />
-          <Route exact path="/profile/update/:id" element={<ProfileUpdate />} />
+          <Route exact path={`/profile/${username}`} element={<ProfileDisplay />} />
+          <Route exact path={`/profile/update/${id}`} element={<ProfileUpdate />} />
           {/* 404 rounte */}
           <Route exact path='*' element={<NotFound />} />
         </Routes>
