@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from 'react-bootstrap/Alert'
 import styles from "../styles/ChangePasswordForm.module.css"
+import NotificationToasts from './NotificationToasts';
 
 
 
-const SignUpForm = () => {
+const ChangePasswordForm = () => {
   const [changePasswordData, setChangePasswordData] = useState({
     old_password: "",
     new_password1: "",
@@ -16,15 +16,16 @@ const SignUpForm = () => {
   const { old_password, new_password1, new_password2, } = changePasswordData;
 
   const [errors, setErrors] = useState({});
+  const [showAlert, setShowAlert] = useState(true);
   const [revealed, setRevealed] = useState(false);
 
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setChangePasswordData({
       ...changePasswordData,
       [event.target.name]: event.target.value,
     });
+    setShowAlert(false)
   };
 
   const handleReveal = () => {
@@ -35,8 +36,15 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/password/change/", changePasswordData);
+      <NotificationToasts
+      show="true"
+      title="Congratiulations!!"
+      body="Your password was updated!"
+      />
+
       //navigate("/signin");
     } catch (err) {
+      setShowAlert(true);
       setErrors(err.response?.data);
     }
   };
@@ -51,7 +59,7 @@ const SignUpForm = () => {
               <Form.Control type={(revealed) ? "text" : "password"} placeholder="Old Password" name='old_password' value={old_password} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.old_password?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -62,7 +70,7 @@ const SignUpForm = () => {
               <Form.Control type={(revealed) ? "text" : "password"} placeholder="New Password" name='new_password1' value={new_password1} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.new_password1?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -72,7 +80,7 @@ const SignUpForm = () => {
               <Form.Control type={(revealed) ? "text" : "password"} placeholder="Confirm Password" name='new_password2' value={new_password2} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.new_password2?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -86,7 +94,7 @@ const SignUpForm = () => {
               </Button>
             </div>
             {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="warning" className="mt-3">
+              <Alert show={showAlert} key={idx} variant="warning" className="mt-3">
                 {message}
               </Alert>
             ))}
@@ -96,4 +104,4 @@ const SignUpForm = () => {
     </Container >
   );
 }
-export default SignUpForm;
+export default ChangePasswordForm;
