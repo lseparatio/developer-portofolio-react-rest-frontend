@@ -3,7 +3,8 @@ import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import axios from "axios";
 import Alert from 'react-bootstrap/Alert'
 import styles from "../styles/ChangePasswordForm.module.css"
-import NotificationToasts from './NotificationToasts';
+import { toast, Flip } from 'react-toastify';
+
 
 
 
@@ -13,6 +14,7 @@ const ChangePasswordForm = () => {
     new_password1: "",
     new_password2: "",
   });
+
   const { old_password, new_password1, new_password2, } = changePasswordData;
 
   const [errors, setErrors] = useState({});
@@ -36,11 +38,17 @@ const ChangePasswordForm = () => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/password/change/", changePasswordData);
-      <NotificationToasts
-      show="true"
-      title="Congratiulations!!"
-      body="Your password was updated!"
-      />
+      toast.success('Your password was changed successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Flip,
+        progress: undefined,
+        theme: "light",
+      });
 
       //navigate("/signin");
     } catch (err) {

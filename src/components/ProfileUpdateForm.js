@@ -6,6 +6,7 @@ import { axiosReq } from "../api/axiosDefaults";
 import styles from "../styles/ProfileUpdateForm.module.css"
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { useProfileData } from '../contexts/ProfileDataContext';
+import { Flip, toast } from 'react-toastify';
 
 const ProfileUpdateForm = () => {
   const currentUser = useCurrentUser();
@@ -60,6 +61,17 @@ const ProfileUpdateForm = () => {
     event.preventDefault();
     try {
       await axios.patch(`profiles/${currentUser?.profile_id}/`, profileData);
+      toast.success('Your profile was updated successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Flip,
+        progress: undefined,
+        theme: "light",
+      });
       navigate(`/profile/${currentUser?.username}`);
     } catch (err) {
       setErrors(err.response?.data);
