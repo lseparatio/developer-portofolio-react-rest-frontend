@@ -3,17 +3,15 @@ import ProfileUpdateForm from '../../components/ProfileUpdateForm'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import NotFound from '../../components/NotFound'
 import ChangePasswordForm from '../../components/ChangePasswordForm'
-import { useProfileData } from '../../contexts/ProfileDataContext'
 import styles from "../../styles/ProfileUpdate.module.css"
 
 
 const ProfileUpdate = () => {
 
   const currentUser = useCurrentUser();
-  const profileData = useProfileData();
 
 
-  if (currentUser?.profile_id?.toString() === profileData?.id?.toString()) {
+  if (currentUser[0]?.profile_id?.toString() === currentUser[1]?.id?.toString()) {
     var loggedInComponents = (
       <div  className={styles.Container}>
         <ProfileUpdateForm />
@@ -29,7 +27,7 @@ const ProfileUpdate = () => {
 
   return (
     <>
-      {currentUser ? loggedInComponents : loggedOutComponents}
+      {currentUser[0] ? loggedInComponents : loggedOutComponents}
     </>
   )
 }

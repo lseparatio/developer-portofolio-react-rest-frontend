@@ -13,19 +13,20 @@ import ProfileUpdate from './pages/profile/ProfileUpdate';
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Home from './pages/Home';
 
 
 function App() {
   const currentUser = useCurrentUser();
-  const id = currentUser?.profile_id?.toString();
-  const username = currentUser?.username?.toString();
+  const id = currentUser[0]?.profile_id?.toString();
+  const username = currentUser[0]?.username?.toString();
   return (
 
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Routes>
-          <Route exact path="/" element={<h1>Home page</h1>} />
+          <Route exact path="/" element={<Home/>} />
           <Route exact path="/about" element={<h1>About</h1>} />
           <Route exact path="/projects" element={<h1>Projects</h1>} />
           <Route exact path="/blog" element={<h1>Blog</h1>} />

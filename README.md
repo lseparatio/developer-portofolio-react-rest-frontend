@@ -2,7 +2,16 @@
 
 Link to backend repo:  [Developer portfolio and freelance site!](https://github.com/lseparatio/developer-portofolio-django-rest-backend)
 
-To connect frontend to backend please rename env_example.py to env.py and update your backend link location.
+To connect frontend to backend please and update your backend link location in  env.development or env.production .
+The usercontext provider will provide now 2 arrays currentUser[0] for user primary details and currentUser[1] for profile.
+i am reasigning as user and profile like that to be less to type every time:
+
+```
+  const currentUser = useCurrentUser();
+  const user = currentUser[0]
+  const profile = currentUser[1]
+```
+
 
 
 # Getting Started with Create React App

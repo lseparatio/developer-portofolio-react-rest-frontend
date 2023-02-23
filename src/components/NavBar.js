@@ -17,6 +17,9 @@ import ProfileDisplay from '../pages/profile/ProfileDisplay';
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
+  const user = currentUser[0];
+  const profile = currentUser[1];
+
 
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
@@ -24,7 +27,7 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      <NavLink to={`/profile/${currentUser?.username}`} element={<ProfileDisplay />}> <Avatar src={`${process.env.REACT_APP_API_URL}${currentUser?.profile_image}`} height={35} /></NavLink>
+      <NavLink to={`/profile/${user?.username}`} element={<ProfileDisplay />}> <Avatar src={`${profile?.image}`} height={35} /></NavLink>
       <ProfileDropdown />
     </>
   );
@@ -53,7 +56,7 @@ const NavBar = () => {
             <NavLink exact="true" className="nav-link" to="/projects">Projects</NavLink>
             <NavLink exact="true" className="nav-link" to="/blog">Blog</NavLink>
             <NavLink exact="true" className="nav-link" to="/contact">Contact</NavLink>
-            {currentUser ? loggedInIcons : loggedOutIcons}
+            {user ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
       </Container>

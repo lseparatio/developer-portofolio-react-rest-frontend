@@ -11,6 +11,7 @@ export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
+    const [profileData, setProfileData] = useState(null);
     const navigate = useNavigate();
 
     const handleMount = async () => {
@@ -67,9 +68,23 @@ export const CurrentUserProvider = ({ children }) => {
             }
         );
     }, [navigate]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data } = await axiosReq.get(`/profiles/${currentUser?.profile_id}/`);
+                setProfileData(data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData()
+    }, [currentUser])
+
     return (
-        <CurrentUserContext.Provider value={currentUser}>
-            <SetCurrentUserContext.Provider value={setCurrentUser}>
+        <CurrentUserContext.Provider value={[currentUser, profileData]}>
+            <SetCurrentUserContext.Provider value={[setCurrentUser, setProfileData]}>
                 {children}
             </SetCurrentUserContext.Provider>
         </CurrentUserContext.Provider>

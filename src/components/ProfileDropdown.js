@@ -23,7 +23,7 @@ function ProfileDropdown() {
 
     return (
         <NavDropdown title={navDropdownTitle} id="settings-dropdown" align="end">
-            <NavDropdown.Item as={Link} className="text-center" to={`/profile/${currentUser?.username}`}>
+            <NavDropdown.Item as={Link} className="text-center" to={`/profile/${currentUser[0]?.username}`}>
                 Profile
             </NavDropdown.Item>
             <NavDropdown.Item className="text-center" href="#action/3.2">
