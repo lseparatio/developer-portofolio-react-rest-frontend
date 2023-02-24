@@ -12,6 +12,8 @@ i am reasigning as user and profile like that to be less to type every time:
   const profile = currentUser[1]
 ```
 
+I use React-toastify for toasts, see the documentation here to find out the variants for toasts. Toasts can be called sitewide.
+https://fkhadra.github.io/react-toastify/introduction/
 
 
 # Getting Started with Create React App

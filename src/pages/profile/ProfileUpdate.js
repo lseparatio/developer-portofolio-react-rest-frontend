@@ -9,9 +9,11 @@ import styles from "../../styles/ProfileUpdate.module.css"
 const ProfileUpdate = () => {
 
   const currentUser = useCurrentUser();
+  const user = currentUser[0]
+  const profile = currentUser[1]
 
 
-  if (currentUser[0]?.profile_id?.toString() === currentUser[1]?.id?.toString()) {
+  if (user?.profile_id?.toString() === profile?.id?.toString()) {
     var loggedInComponents = (
       <div  className={styles.Container}>
         <ProfileUpdateForm />
@@ -27,7 +29,7 @@ const ProfileUpdate = () => {
 
   return (
     <>
-      {currentUser[0] ? loggedInComponents : loggedOutComponents}
+      {user ? loggedInComponents : loggedOutComponents}
     </>
   )
 }

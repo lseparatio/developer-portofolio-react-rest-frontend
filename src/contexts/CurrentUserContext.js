@@ -35,7 +35,7 @@ export const CurrentUserProvider = ({ children }) => {
                 } catch (err) {
                     setCurrentUser((prevCurrentUser) => {
                         if (prevCurrentUser) {
-                            navigate("/signin");
+                            navigate("/");
                         }
                         return null;
                     });
@@ -57,7 +57,7 @@ export const CurrentUserProvider = ({ children }) => {
                     } catch (err) {
                         setCurrentUser((prevCurrentUser) => {
                             if (prevCurrentUser) {
-                                navigate("/signin");
+                                navigate("/");
                             }
                             return null;
                         });
@@ -69,7 +69,7 @@ export const CurrentUserProvider = ({ children }) => {
         );
     }, [navigate]);
 
-
+    // As soon as there is a user or user is updated we want to fetch user profile.
     useEffect(() => {
         const fetchData = async () => {
             try {

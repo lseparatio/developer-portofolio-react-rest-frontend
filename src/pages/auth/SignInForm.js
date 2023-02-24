@@ -8,12 +8,14 @@ import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { Col, Container, Row, Image } from 'react-bootstrap';
 import loginImage from "../../assets/img/login.webp"
 import styles from "../../styles/SignIn.module.css";
+import { Flip, toast } from 'react-toastify';
 
 
 
 const SignInForm = () => {
 
     const setCurrentUser = useSetCurrentUser();
+    const setUser = setCurrentUser[0]
     const [signInData, setSignInData] = useState({
         email: "",
         password: "",
@@ -22,6 +24,7 @@ const SignInForm = () => {
 
     const [errors, setErrors] = useState({});
     const [revealed, setRevealed] = useState(false);
+    const [showAlert, setShowAlert] = useState(true);
 
     const navigate = useNavigate();
 
@@ -30,6 +33,7 @@ const SignInForm = () => {
             ...signInData,
             [event.target.name]: event.target.value,
         });
+        setShowAlert(false)
     };
 
     const handleReveal = () => {
@@ -40,9 +44,21 @@ const SignInForm = () => {
         event.preventDefault();
         try {
             const { data } = await axios.post("dj-rest-auth/login/", signInData);
-            setCurrentUser(data.user);
+            setUser(data.user);
             navigate(`/profile/${data.user.username}`);
+            toast.success('Your was sign in successfully!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                transition: Flip,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (err) {
+            setShowAlert(true);
             setErrors(err.response?.data);
         }
     };
@@ -60,7 +76,7 @@ const SignInForm = () => {
                             <Form.Control type="email" placeholder="Enter Email" name='email' value={email} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.email?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -69,8 +85,8 @@ const SignInForm = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type={(revealed) ? "text" : "password"} placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
-                        {errors.password1?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                        {errors.password?.map((message, idx) => (
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -85,7 +101,7 @@ const SignInForm = () => {
                             </Button>
                         </div>
                         {errors.non_field_errors?.map((message, idx) => (
-                            <Alert key={idx} variant="warning" className="mt-3">
+                            <Alert show={showAlert} key={idx} variant="warning" className="mt-3">
                                 {message}
                             </Alert>
                         ))}

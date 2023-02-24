@@ -3,19 +3,35 @@ import axios from "axios";
 import { useSetCurrentUser, } from '../contexts/CurrentUserContext';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useCurrentUser, } from '../contexts/CurrentUserContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Flip, toast } from 'react-toastify';
 
 
 function ProfileDropdown() {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
+    const user = setCurrentUser[0]
+    const navigate = useNavigate();
 
     const handleSignOut = async () => {
         try {
             await axios.post("dj-rest-auth/logout/");
-            setCurrentUser(null);
+            user(null);
+            navigate("/signin");
+            toast.warn('Your was sign out successfully!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                transition: Flip,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (err) {
             console.log(err);
+
         }
     };
 

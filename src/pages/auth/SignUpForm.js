@@ -5,6 +5,7 @@ import axios from "axios";
 import Alert from 'react-bootstrap/Alert'
 import registerImage from "../../assets/img/register.webp"
 import styles from "../../styles/SignUp.module.css"
+import { Flip, toast } from 'react-toastify';
 
 
 const SignUpForm = () => {
@@ -20,6 +21,7 @@ const SignUpForm = () => {
 
     const [errors, setErrors] = useState({});
     const [revealed, setRevealed] = useState(false);
+    const [showAlert, setShowAlert] = useState(true);
 
     const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ const SignUpForm = () => {
             ...signUpData,
             [event.target.name]: event.target.value,
         });
+        setShowAlert(false)
     };
 
     const handleReveal = () => {
@@ -39,7 +42,30 @@ const SignUpForm = () => {
         try {
             await axios.post("dj-rest-auth/registration/", signUpData);
             navigate("/signin");
+            toast.success('Your registration is successfully!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                transition: Flip,
+                progress: undefined,
+                theme: "light",
+            });
+            toast.warn('An verification mail was sent please check your email!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                transition: Flip,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (err) {
+            setShowAlert(true);
             setErrors(err.response?.data);
         }
     };
@@ -57,7 +83,7 @@ const SignUpForm = () => {
                             <Form.Control type="text" placeholder="Username" name='username' value={username} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.username?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -67,7 +93,7 @@ const SignUpForm = () => {
                             <Form.Control type="text" placeholder="First Name" name='first_name' value={first_name} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.first_name?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -77,7 +103,7 @@ const SignUpForm = () => {
                             <Form.Control type="text" placeholder="Last Name" name='last_name' value={last_name} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.last_name?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -90,7 +116,7 @@ const SignUpForm = () => {
                             </Form.Text>
                         </Form.Group>
                         {errors.email?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -103,7 +129,7 @@ const SignUpForm = () => {
                             <Form.Check type="checkbox" label="Show Passwords" onClick={handleReveal} />
                         </Form.Group>
                         {errors.password1?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -113,7 +139,7 @@ const SignUpForm = () => {
                             <Form.Control type={(revealed) ? "text" : "password"} placeholder="Confirm Password" name='password2' value={password2} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
                         {errors.password2?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
+                            <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
@@ -127,7 +153,7 @@ const SignUpForm = () => {
                             </Button>
                         </div>
                         {errors.non_field_errors?.map((message, idx) => (
-                            <Alert key={idx} variant="warning" className="mt-3">
+                            <Alert show={showAlert} key={idx} variant="warning" className="mt-3">
                                 {message}
                             </Alert>
                         ))}
