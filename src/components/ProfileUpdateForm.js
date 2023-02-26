@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, } from 'react'
 import { Col, Container, Row, Image, Form, Button, Alert } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { axiosReq } from "../api/axiosDefaults";
 import styles from "../styles/ProfileUpdateForm.module.css"
-import { useCurrentUser } from '../contexts/CurrentUserContext';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 
 import { Flip, toast } from 'react-toastify';
 
 const ProfileUpdateForm = () => {
   const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
+  const user = currentUser[0];
+  const profile = currentUser[1];
+  const setProfile = setCurrentUser[1];
 
 
   const [errors, setErrors] = useState({});
@@ -17,6 +21,7 @@ const ProfileUpdateForm = () => {
   const [showAlert, setShowAlert] = useState(true);
 
   const [profileData, setProfileData,] = useState({
+    id: "",
     user: "",
     birth_date: "",
     phone_number: "",
@@ -26,18 +31,21 @@ const ProfileUpdateForm = () => {
     county: "",
     postcode: "",
     country: "",
+    image: "",
   });
 
-  const { birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, } = profileData;
+
+  const { birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country } = profileData;
+
 
   useEffect(() => {
     const handleMount = async () => {
-      if (currentUser?.profile_id?.toString() === currentUser?.id?.toString()) {
+      if (user?.profile_id?.toString() === profile?.id?.toString()) {
 
         try {
-          const { data } = await axiosReq.get(`/profiles/${currentUser?.id?.toString()}/`);
-          const { birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, } = data;
-          setProfileData({ birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, });
+          const { data } = await axiosReq.get(`/profiles/${profile?.id?.toString()}/`);
+          const { id, user, birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, image } = data;
+          setProfileData({ id, user, birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, image });
         } catch (err) {
           console.log(err);
         }
@@ -47,7 +55,7 @@ const ProfileUpdateForm = () => {
     };
 
     handleMount();
-  }, [currentUser,]);
+  }, [user, profile]);
 
 
   const handleChange = (event) => {
@@ -60,8 +68,17 @@ const ProfileUpdateForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("birth_date", birth_date);
+    formData.append("phone_number", phone_number);
+    formData.append("street_address1", street_address1);
+    formData.append("street_address2", street_address2);
+    formData.append("town_or_city", town_or_city);
+    formData.append("county", county);
+    formData.append("postcode", postcode);
+    formData.append("country", country);
     try {
-      await axios.patch(`profiles/${currentUser?.profile_id}/`, profileData);
+      await axios.patch(`profiles/${user?.profile_id}/`, formData);
       toast.success('Your profile was updated successfully', {
         position: "top-right",
         autoClose: 5000,
@@ -73,7 +90,8 @@ const ProfileUpdateForm = () => {
         progress: undefined,
         theme: "light",
       });
-      navigate(`/profile/${currentUser?.username}`);
+      setProfile(profileData)
+      navigate(`/profile/${user?.username}`);
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -83,7 +101,7 @@ const ProfileUpdateForm = () => {
     <Container fluid>
       <Row>
         <Col md={6}>
-          <Image fluid src={currentUser?.image} alt='Two persones filling a form'></Image>
+          <Image fluid src={profile?.image} alt='Two persones filling a form'></Image>
         </Col>
 
         <Col md={6} className="d-flex align-items-center justify-content-center">
