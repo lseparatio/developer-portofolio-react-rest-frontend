@@ -189,7 +189,7 @@ const ProfileUpdateForm = () => {
 
             <div className="d-grid gap-2">
               <Button variant="secondary" type="submit">
-                Update
+                Update Profile
               </Button>
             </div>
             {errors.non_field_errors?.map((message, idx) => (
