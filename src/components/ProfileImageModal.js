@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Image, Modal } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
-//import styles from "../styles/ProfileImageModal.module.css"
+import styles from "../styles/ProfileImageModal.module.css"
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import { Flip, toast } from 'react-toastify';
 import axios from 'axios';
@@ -14,6 +14,7 @@ function ProfileImageModal(props) {
   const profile = currentUser[1];
   const setProfile = setCurrentUser[1];
   const imageFile = useRef();
+
 
   const [errors, setErrors] = useState({});
   const [showAlert, setShowAlert] = useState(true);
@@ -52,6 +53,16 @@ function ProfileImageModal(props) {
 
     handleMount();
   }, [user, profile]);
+
+  const handleChange = (e) => {
+    if (e.target.files.length) {
+      setProfileData({
+        ...profileData,
+        image: URL.createObjectURL(e.target.files[0]),
+      });
+      //setPreviewImage(image)
+    }
+  };
 
 
   const handleSubmit = async (event) => {
@@ -93,21 +104,14 @@ function ProfileImageModal(props) {
           Update profile picture
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className='mx-auto'>
+        <Image fluid src={profileData.image} className={styles.Avatar} alt='Profile Image' ></Image>
         <Form id='uploadProfileImage'>
           <Form.Group controlId="formFileLg" className="mb-3">
             <Form.Label className="ms-auto">Upload new picture</Form.Label>
             <Form.Control type="file" required size="lg" ref={imageFile}
               accept="image/*"
-              onChange={(e) => {
-                setShowAlert(false);
-                if (e.target.files.length) {
-                  setProfileData({
-                    ...profileData,
-                    image: URL.createObjectURL(e.target.files[0]),
-                  });
-                }
-              }} />
+              onChange={handleChange} />
           </Form.Group>
           {errors?.image?.map((message, idx) => (
             <Alert show={showAlert} key={idx} variant="warning">
