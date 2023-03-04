@@ -1,0 +1,14 @@
+# I discovered that if you use react router you will not be able to refresh or type direct url in browser.
+# This code will solve that in apache server. I will fallow latter with solution for NGINX.
+
+<IfModule mod_rewrite.c>
+ 
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+ 
+</IfModule>
