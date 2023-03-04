@@ -71,15 +71,18 @@ export const CurrentUserProvider = ({ children }) => {
 
     // As soon as there is a user or user is updated we want to fetch user profile.
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data } = await axiosReq.get(`/profiles/${currentUser?.profile_id}/`);
-                setProfileData(data);
-            } catch (err) {
-                console.log(err);
+        // Make request only if is an user there. 
+        if (currentUser) {
+            const fetchData = async () => {
+                try {
+                    const { data } = await axiosReq.get(`/profiles/${currentUser?.profile_id}/`);
+                    setProfileData(data);
+                } catch (err) {
+                    console.log(err);
+                }
             }
+            fetchData()
         }
-        fetchData()
     }, [currentUser])
 
     return (
