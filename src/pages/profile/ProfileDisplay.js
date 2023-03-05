@@ -10,8 +10,9 @@ function ProfileDisplay() {
   const currentUser = useCurrentUser();
   const user = currentUser[0]
   const profile = currentUser[1]
+  console.log(user)
   const [modalShow, setModalShow] = React.useState(false);
-  console.log(profile)
+  //console.log(profile)
 
 
   const loggedOutComponents = (<NotFound />)

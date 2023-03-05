@@ -121,7 +121,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="Phone Number" name='phone_number' value={phone_number} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.phone_number?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -131,7 +131,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="Street Address 1" name='street_address1' value={street_address1} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.street_address1?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -141,7 +141,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="Street Address 2" name='street_address2' value={street_address2} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.street_address2?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -151,7 +151,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="Town Or City" name='town_or_city' value={town_or_city} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.town_or_city?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -161,7 +161,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="County" name='county' value={county} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.county?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -171,7 +171,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="Post Code" name='postcode' value={postcode} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.postcode?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -182,7 +182,7 @@ const ProfileUpdateForm = () => {
               <Form.Control type="text" placeholder="Country" name='country' value={country} onChange={handleChange} className={styles.Input} />
             </Form.Group>
             {errors.country?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert show={showAlert} variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -193,7 +193,7 @@ const ProfileUpdateForm = () => {
               </Button>
             </div>
             {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="warning" className="mt-3">
+              <Alert show={showAlert} key={idx} variant="warning" className="mt-3">
                 {message}
               </Alert>
             ))}

@@ -4,6 +4,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import NotFound from '../../components/NotFound'
 import ChangePasswordForm from '../../components/ChangePasswordForm'
 import styles from "../../styles/ProfileUpdate.module.css"
+import UserUpdateForm from '../../components/UserUpdateForm'
 
 
 const ProfileUpdate = () => {
@@ -15,10 +16,10 @@ const ProfileUpdate = () => {
 
   if (user?.profile_id?.toString() === profile?.id?.toString()) {
     var loggedInComponents = (
-      <div  className={styles.Container}>
+      <div className={styles.Container}>
         <ProfileUpdateForm />
         <ChangePasswordForm />
-      
+        <UserUpdateForm />
       </div>
     )
   } else {
