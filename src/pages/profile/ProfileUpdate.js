@@ -5,6 +5,7 @@ import NotFound from '../../components/NotFound'
 import ChangePasswordForm from '../../components/ChangePasswordForm'
 import styles from "../../styles/ProfileUpdate.module.css"
 import UserUpdateForm from '../../components/UserUpdateForm'
+import { Col, Row } from 'react-bootstrap'
 
 
 const ProfileUpdate = () => {
@@ -17,9 +18,15 @@ const ProfileUpdate = () => {
   if (user?.profile_id?.toString() === profile?.id?.toString()) {
     var loggedInComponents = (
       <div className={styles.Container}>
-        <ProfileUpdateForm />
-        <ChangePasswordForm />
-        <UserUpdateForm />
+        <Row>
+          <Col md={6}>
+            <UserUpdateForm />
+            <ChangePasswordForm />
+          </Col>
+          <Col md={6}><ProfileUpdateForm /></Col>
+
+
+        </Row>
       </div>
     )
   } else {

@@ -60,8 +60,8 @@ const ChangePasswordForm = () => {
   return (
     <Container fluid>
       <Row>
-        <Col md={6} className="d-flex align-items-center justify-content-center">
-          <Form onSubmit={handleSubmit}>
+        <Col className="d-flex align-items-center justify-content-center">
+          <Form onSubmit={handleSubmit} className={styles.Form}>
             <Form.Group className="mb-3" controlId="old_password">
               <Form.Label>Old Password</Form.Label>
               <Form.Control type={(revealed) ? "text" : "password"} placeholder="Old Password" name='old_password' value={old_password} onChange={handleChange} className={styles.Input} />

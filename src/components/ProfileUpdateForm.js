@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react'
-import { Col, Container, Row, Image, Form, Button, Alert } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { axiosReq } from "../api/axiosDefaults";
@@ -101,12 +101,8 @@ const ProfileUpdateForm = () => {
   return (
     <Container fluid>
       <Row>
-        <Col md={6}>
-          <Image fluid src={profile?.image} alt='Two persones filling a form'></Image>
-        </Col>
-
-        <Col md={6} className="d-flex align-items-center justify-content-center">
-          <Form onSubmit={handleSubmit}>
+        <Col className="d-flex align-items-center justify-content-center">
+          <Form onSubmit={handleSubmit} className={styles.Form}>
             <Form.Group className="mb-3" controlId="birth_date">
               <Form.Label>Date of Birth</Form.Label>
               <Form.Control type="date" placeholder="Date of Birth" name='birth_date' value={birth_date} onChange={handleChange} className={styles.Input} />

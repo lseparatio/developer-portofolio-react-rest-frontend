@@ -14,11 +14,10 @@ const UserUpdateForm = () => {
   const user = currentUser[0];
   const profile = currentUser[1];
   const setUser = setCurrentUser[0];
-  console.log(user)
+  //console.log(user)
 
 
   const [errors, setErrors] = useState({});
-  console.log(errors.username)
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(true);
 
@@ -96,9 +95,8 @@ const UserUpdateForm = () => {
   return (
     <Container fluid>
       <Row>
-
-        <Col md={6} className="d-flex align-items-center justify-content-center">
-          <Form onSubmit={handleSubmit}>
+        <Col className="d-flex align-items-center justify-content-center">
+          <Form onSubmit={handleSubmit} className={styles.Form}>
             <Form.Group className="mb-3" controlId="username">
               <Form.Label>Username</Form.Label>
               <Form.Control type="text" placeholder="Username" name='username' value={username} onChange={handleChange} className={styles.Input} />
