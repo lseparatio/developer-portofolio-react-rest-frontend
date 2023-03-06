@@ -21,17 +21,17 @@ const ProfileUpdateForm = () => {
   const [showAlert, setShowAlert] = useState(true);
 
   const [profileData, setProfileData,] = useState({
-    id: "",
-    user: "",
-    birth_date: "",
-    phone_number: "",
-    street_address1: "",
-    street_address2: "",
-    town_or_city: "",
-    county: "",
-    postcode: "",
-    country: "",
-    image: "",
+    id: profile.id,
+    user: profile.user,
+    birth_date: profile.birth_date,
+    phone_number: profile.phone_number,
+    street_address1: profile.street_address1,
+    street_address2: profile.street_address2,
+    town_or_city: profile.town_or_city,
+    county: profile.county,
+    postcode: profile.postcode,
+    country: profile.country,
+    image: profile.image,
   });
 
 
@@ -93,6 +93,7 @@ const ProfileUpdateForm = () => {
       setProfile(profileData)
       navigate(`/profile/${user?.username}`);
     } catch (err) {
+      setShowAlert(true);
       setErrors(err.response?.data);
     }
   };

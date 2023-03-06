@@ -23,12 +23,12 @@ const UserUpdateForm = () => {
   const [showAlert, setShowAlert] = useState(true);
 
   const [userData, setUserData] = useState({
-    pk: "",
-    email: "",
-    username: "",
-    first_name: "",
-    last_name: "",
-    profile_id: "",
+    pk: user.pk,
+    email: user.email,
+    username: user.username,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    profile_id: user.profile_id,
   });
 
 
