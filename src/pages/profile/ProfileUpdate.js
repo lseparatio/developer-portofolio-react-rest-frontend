@@ -20,19 +20,18 @@ const ProfileUpdate = () => {
       <div className={styles.Container}>
         <Row>
           <Col md={6}>
+            <ProfileUpdateForm />
+          </Col>
+          <Col md={6}>
             <UserUpdateForm />
             <ChangePasswordForm />
           </Col>
-          <Col md={6}><ProfileUpdateForm /></Col>
-
-
         </Row>
       </div>
     )
   } else {
     var loggedOutComponents = <NotFound />
   }
-
 
 
   return (
