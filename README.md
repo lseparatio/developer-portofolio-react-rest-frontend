@@ -15,6 +15,18 @@ i am reasigning as user and profile like that to be less to type every time:
 I use React-toastify for toasts, see the documentation here to find out the variants for toasts. Toasts can be called sitewide.
 https://fkhadra.github.io/react-toastify/introduction/
 
+# Making servers to work with react router
+
+ If you use Apache then you have an .httaccess file in source sode so you have nothing to do
+but if you use NGINX then in your NGINX config file you have to add:
+
+```
+location / {
+  try_files $uri /index.html;
+}
+```
+
+
 
 # Getting Started with Create React App
 

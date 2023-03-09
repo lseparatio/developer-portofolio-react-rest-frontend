@@ -12,12 +12,16 @@ const HomeHeroSection = () => {
                 <Col md={7} className={styles.Coll}>
                     <Row>
                         <Col>
-                            <h1 className={styles.H1}>I’m a full stack web developer!</h1>
+                            <h1 className={styles.H1}>I'am a Full Stack Web Developer and Product Specialist!</h1>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <p className={styles.P}>Trained to develop a product from idea to deployment. I specialize in UI/UX Design, Responsive Web Design, and Visual Development.</p>
+                            <p className={styles.P}>I have a proven track record of driving product development from ideation to deployment.
+                                My areas of specialization include UI/UX design, responsive web design, and visual development.
+                                I am experienced in creating wireframes and user stories, utilizing git and SQL,
+                                and deploying to servers to ensure efficient and effective product delivery.
+                            </p>
                         </Col>
                     </Row>
 
@@ -30,7 +34,7 @@ const HomeHeroSection = () => {
                     </Row>
                 </Col >
                 <Col md={5} sm={12} className="d-flex align-items-center justify-content-center">
-                    <Image rounded fluid={true} src={heroImage} className={styles.Image}></Image>
+                    <Image rounded fluid={true} src={heroImage} className={styles.Image} alt="Ionut Zapototchi profile image"></Image>
                 </Col>
             </Row >
         </Container>
