@@ -20,7 +20,7 @@ import {
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
 
-function SkillsFeature() {
+const SkillsFeature = () => {
   useEffect(() => {
     const root = document.documentElement;
     const marqueeElementsDisplayed = getComputedStyle(root).getPropertyValue(

@@ -1,41 +1,54 @@
-import { useCurrentUser } from '../../contexts/CurrentUserContext';
-import NotFound from '../../components/NotFound';
-import { Col, Image, Row } from 'react-bootstrap';
-import React, { useEffect } from 'react';
-import styles from "../../styles/ProfileDisplay.module.css"
-import { Link } from 'react-router-dom';
-import ProfileImageModal from '../../components/ProfileImageModal';
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import NotFound from "../../components/NotFound";
+import { Col, Image, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
+import styles from "../../styles/ProfileDisplay.module.css";
+import { Link } from "react-router-dom";
+import ProfileImageModal from "../../components/ProfileImageModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
-function ProfileDisplay() {
+const ProfileDisplay = () => {
   const currentUser = useCurrentUser();
-  const user = currentUser[0]
-  const profile = currentUser[1]
-  console.log(user)
+  const user = currentUser[0];
+  const profile = currentUser[1];
+  console.log(user);
   const [modalShow, setModalShow] = React.useState(false);
   //console.log(profile)
 
-
-  const loggedOutComponents = (<NotFound />)
-
+  const loggedOutComponents = <NotFound />;
 
   useEffect(() => {
-    setModalShow(false)
-  }, [profile])
-
+    setModalShow(false);
+  }, [profile]);
 
   const loggedInComponents = (
     <>
       <Row>
         <Col md={6}>
           <div className={styles.ContainerImage}>
-
-            <Image fluid src={profile?.image} alt='Profile Image' className={styles.Image}></Image>
+            <Image
+              fluid
+              src={profile?.image}
+              alt="Profile Image"
+              className={styles.Image}
+            ></Image>
+            <Link
+              onClick={() => setModalShow(true)}
+              className={styles.MobileIcon}
+              title="Update profile picture"
+            >
+              <FontAwesomeIcon icon={faUpload} className={styles.MobileIcon} />
+            </Link>
             <div className={styles.Overlay}>
-              <Link onClick={() => setModalShow(true)} className={styles.Icon} title="Update profile picture">
-                <i className="fa fa-camera"></i>
+              <Link
+                onClick={() => setModalShow(true)}
+                className={styles.Icon}
+                title="Update profile picture"
+              >
+                <FontAwesomeIcon icon={faUpload} />
               </Link>
             </div>
-
           </div>
         </Col>
         <Col md={6}>
@@ -55,13 +68,9 @@ function ProfileDisplay() {
         </Col>
       </Row>
     </>
-  )
+  );
 
-  return (
-    <>
-      {user ? loggedInComponents : loggedOutComponents}
-    </>
-  )
-}
+  return <>{user ? loggedInComponents : loggedOutComponents}</>;
+};
 
-export default ProfileDisplay
+export default ProfileDisplay;

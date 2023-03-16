@@ -1,53 +1,75 @@
 /* Container needed to position the overlay. Adjust the width as needed */
 .ContainerImage {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Make the image to responsive */
 .Image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 /* The overlay effect (full height and width) - lays on top of the container and over the image */
 .Overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .3s ease;
-    background-color: gray;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: gray;
 }
 
 /* When you mouse over the container, fade in the overlay icon*/
 .ContainerImage:hover .Overlay {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 /* The icon inside the overlay is positioned in the middle vertically and horizontally */
 .Icon {
-    color: white;
-    font-size: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
-    opacity: 1;
+  color: white;
+  font-size: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 1;
 }
 
 /* When you move the mouse over the icon, change color */
 .Icon:hover {
-    color: green;
+  color: green;
+  opacity: 1;
+}
+
+.MobileIcon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .MobileIcon {
+    display: block;
+    color: black;
+    font-size: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-left: 1vh;
+    padding-bottom: 1vh;
     opacity: 1;
+  }
+
+  .Overlay {
+    display: none;
+  }
 }
