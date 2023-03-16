@@ -43,7 +43,7 @@ function SkillsFeature() {
         md={2}
         className={`d-flex align-items-center justify-content-center ${styles.TextCol}`}
       >
-        <p>The technology utilized in my projects:</p>
+        <p className={styles.Paragraf}>The technology utilized in my projects:</p>
       </Col>
       <Col md={10} className={`marquee ${styles.Marquee}`}>
         <ul className={`marquee-content ${styles.MarqueeContent}`}>
