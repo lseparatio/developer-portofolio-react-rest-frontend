@@ -3,7 +3,7 @@ import NotFound from "../../components/NotFound";
 import { Col, Image, Row } from "react-bootstrap";
 import React, { useEffect } from "react";
 import styles from "../../styles/ProfileDisplay.module.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ProfileImageModal from "../../components/ProfileImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,7 @@ const ProfileDisplay = () => {
   const currentUser = useCurrentUser();
   const user = currentUser[0];
   const profile = currentUser[1];
-  console.log(user);
+  //console.log(user);
   const [modalShow, setModalShow] = React.useState(false);
   //console.log(profile)
 
@@ -52,6 +52,7 @@ const ProfileDisplay = () => {
           </div>
         </Col>
         <Col md={6}>
+          <NavLink to={`/profile/update/${currentUser[0]?.profile_id}`} > Update Profile </NavLink>
           <div>{user?.pk}</div>
           <div>{user?.username}</div>
           <div>{user?.first_name}</div>

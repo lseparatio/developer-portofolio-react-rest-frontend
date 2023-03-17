@@ -1,0 +1,17 @@
+.ParagrafTitle {
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  font-size: xx-large;
+  font-weight: 800;
+}
+
+.AccordionHeader button {
+  font-size: x-large;
+  font-weight: 500;
+  padding-left: 10%;
+}
+
+.AccordionBody {
+  font-size: medium;
+  font-weight: 300;
+}

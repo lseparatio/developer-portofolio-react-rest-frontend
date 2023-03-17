@@ -1,14 +1,10 @@
 import React from 'react'
-import { useCurrentUser } from '../contexts/CurrentUserContext'
-import { NavLink } from "react-router-dom";
 import HomeHeroSection from '../components/HomeHeroSection';
 import SkillsFeature from '../components/SkillsFeature';
 import { Col, Row } from 'react-bootstrap';
+import WhatIDo from '../components/WhatIDo';
 
 const Home = () => {
-  const currentUser = useCurrentUser();
-  // console.log(currentUser[0])
-  // console.log(currentUser[1])
   return (
     <>
       <Row md={12}>
@@ -21,7 +17,12 @@ const Home = () => {
           <SkillsFeature />
         </Col>
       </Row>
-      <NavLink to={`/profile/update/${currentUser[0]?.profile_id}`} > Work in progress </NavLink>
+
+      <Row >
+        <Col md={12}>
+          <WhatIDo />
+        </Col>
+      </Row>
     </>
   )
 }

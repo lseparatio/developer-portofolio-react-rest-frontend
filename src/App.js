@@ -1,5 +1,3 @@
-//import logo from './logo.svg';
-//import Button from 'react-bootstrap/Button';
 import NavBar from './components/NavBar';
 import styles from './App.module.css';
 import Container from "react-bootstrap/Container";
