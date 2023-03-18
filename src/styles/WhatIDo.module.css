@@ -9,9 +9,12 @@
   font-size: x-large;
   font-weight: 500;
   padding-left: 10%;
+
+  
 }
 
 .AccordionBody {
   font-size: medium;
   font-weight: 300;
+  text-align: center;
 }
