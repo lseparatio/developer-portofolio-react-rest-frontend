@@ -12,6 +12,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Routes>
-          <Route exact path="/" element={<Home/>} />
+          <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<h1>About</h1>} />
           <Route exact path="/projects" element={<h1>Projects</h1>} />
           <Route exact path="/blog" element={<h1>Blog</h1>} />
@@ -37,6 +38,7 @@ function App() {
           <Route exact path='*' element={<NotFound />} />
         </Routes>
       </Container>
+      <Footer />
       <ToastContainer />
     </div>
 

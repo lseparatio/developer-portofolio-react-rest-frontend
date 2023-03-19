@@ -12,7 +12,7 @@ const WhatIDo = () => {
       </Row>
       <Row>
         <Col md={6} sm={12}>
-          <Accordion defaultActiveKey="0" flush>
+          <Accordion flush>
             <Accordion.Item eventKey="0">
               <Accordion.Header className={styles.AccordionHeader}>Planning / User Stories</Accordion.Header>
               <Accordion.Body className={styles.AccordionBody}>

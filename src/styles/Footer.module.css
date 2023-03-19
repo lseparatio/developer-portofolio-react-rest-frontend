@@ -1,0 +1,22 @@
+.Footer {
+  border-top: 1px solid black;
+  margin-top: 3vh;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  border-bottom: 1px solid black;
+}
+
+a,
+a:link,
+a icon {
+  text-decoration: none;
+  color: #414344;
+}
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.DownloadIcon {
+  color: #414344;
+}

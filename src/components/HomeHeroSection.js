@@ -28,7 +28,7 @@ const HomeHeroSection = () => {
                     <Row>
                         <Col className="d-flex align-items-center justify-content-center">
                             <NavLink to="/signup">
-                                <Button variant='secondary' className={styles.Button}>CONNECT WITH ME</Button>
+                                <Button variant='secondary' className={styles.Button}>HIRE ME NOW</Button>
                             </NavLink>
                         </Col>
                     </Row>
