@@ -3,6 +3,7 @@ import HomeHeroSection from '../components/HomeHeroSection';
 import SkillsFeature from '../components/SkillsFeature';
 import { Col, Row } from 'react-bootstrap';
 import WhatIDo from '../components/WhatIDo';
+import ProvidingStelar from '../components/ProvidingStelar';
 
 const Home = () => {
   return (
@@ -21,6 +22,11 @@ const Home = () => {
       <Row >
         <Col md={12}>
           <WhatIDo />
+        </Col>
+      </Row>
+      <Row >
+        <Col md={12}>
+          <ProvidingStelar />
         </Col>
       </Row>
     </>

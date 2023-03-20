@@ -1,0 +1,19 @@
+.Container {
+  border: 1px dotted #414344;
+  margin-top: 4vh;
+}
+
+.TextCol {
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  font-size: xx-large;
+  font-weight: 800;
+  text-align: center;
+}
+
+.Button button {
+  margin-bottom: 4vh;
+  font-size: x-large;
+  font-weight: 500;
+  border-radius: 25px;
+}
