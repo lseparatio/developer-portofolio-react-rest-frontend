@@ -4,6 +4,7 @@ import axios from "axios";
 import Alert from 'react-bootstrap/Alert'
 import styles from "../styles/ChangePasswordForm.module.css"
 import { toast, Flip } from 'react-toastify';
+import RevealPasswordButton from '../shared/RevealPasswordButton';
 
 
 
@@ -19,7 +20,11 @@ const ChangePasswordForm = () => {
 
   const [errors, setErrors] = useState({});
   const [showAlert, setShowAlert] = useState(true);
-  const [revealed, setRevealed] = useState(false);
+  /* Updated in RevealPasswordButton */
+  const [revealOldPassword, setRevealOldPasswordValue] = useState(false);
+  const [revealNewPassword1, setRevealNewPasswordValue1] = useState(false);
+  const [revealNewPassword2, setRevealNewPasswordValue2] = useState(false);
+  /* Updated in RevealPasswordButton */
 
 
   const handleChange = (event) => {
@@ -30,9 +35,7 @@ const ChangePasswordForm = () => {
     setShowAlert(false)
   };
 
-  const handleReveal = () => {
-    setRevealed(!revealed)
-  }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +67,10 @@ const ChangePasswordForm = () => {
           <Form onSubmit={handleSubmit} className={styles.Form}>
             <Form.Group className="mb-3" controlId="old_password">
               <Form.Label>Old Password</Form.Label>
-              <Form.Control type={(revealed) ? "text" : "password"} placeholder="Old Password" name='old_password' value={old_password} onChange={handleChange} className={styles.Input} />
+              <div className="input-group">
+                <Form.Control type={(revealOldPassword) ? "text" : "password"} placeholder="Old Password" name='old_password' value={old_password} onChange={handleChange} className={styles.Input} />
+                <RevealPasswordButton state={revealOldPassword} setstate={setRevealOldPasswordValue} />
+              </div>
             </Form.Group>
             {errors.old_password?.map((message, idx) => (
               <Alert show={showAlert} variant="warning" key={idx}>
@@ -75,7 +81,10 @@ const ChangePasswordForm = () => {
 
             <Form.Group className="mb-3" controlId="new_password1">
               <Form.Label>New Password</Form.Label>
-              <Form.Control type={(revealed) ? "text" : "password"} placeholder="New Password" name='new_password1' value={new_password1} onChange={handleChange} className={styles.Input} />
+              <div className="input-group">
+                <Form.Control type={(revealNewPassword1) ? "text" : "password"} placeholder="New Password" name='new_password1' value={new_password1} onChange={handleChange} className={styles.Input} />
+                <RevealPasswordButton state={revealNewPassword1} setstate={setRevealNewPasswordValue1} />
+              </div>
             </Form.Group>
             {errors.new_password1?.map((message, idx) => (
               <Alert show={showAlert} variant="warning" key={idx}>
@@ -85,7 +94,10 @@ const ChangePasswordForm = () => {
 
             <Form.Group className="mb-3" controlId="new_password2">
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control type={(revealed) ? "text" : "password"} placeholder="Confirm Password" name='new_password2' value={new_password2} onChange={handleChange} className={styles.Input} />
+              <div className="input-group">
+                <Form.Control type={(revealNewPassword2) ? "text" : "password"} placeholder="Confirm Password" name='new_password2' value={new_password2} onChange={handleChange} className={styles.Input} />
+                <RevealPasswordButton state={revealNewPassword2} setstate={setRevealNewPasswordValue2} />
+              </div>
             </Form.Group>
             {errors.new_password2?.map((message, idx) => (
               <Alert show={showAlert} variant="warning" key={idx}>
@@ -93,9 +105,6 @@ const ChangePasswordForm = () => {
               </Alert>
             ))}
 
-            <Form.Group className='mb-3' controlId="revealPassword">
-              <Form.Check type="checkbox" label="Show Passwords" onClick={handleReveal} />
-            </Form.Group>
             <div className="d-grid gap-2">
               <Button variant="secondary" type="submit">
                 Change Password

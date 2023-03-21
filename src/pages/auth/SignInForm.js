@@ -9,6 +9,7 @@ import { Col, Container, Row, Image } from 'react-bootstrap';
 import loginImage from "../../assets/img/login.webp"
 import styles from "../../styles/SignIn.module.css";
 import { Flip, toast } from 'react-toastify';
+import RevealPasswordButton from '../../shared/RevealPasswordButton';
 
 
 
@@ -23,7 +24,9 @@ const SignInForm = () => {
     const { email, password, } = signInData;
 
     const [errors, setErrors] = useState({});
-    const [revealed, setRevealed] = useState(false);
+    /* Updated in RevealPasswordButton */
+    const [revealPassword, setRevealPasswordValue] = useState(false);
+    /* Updated in RevealPasswordButton */
     const [showAlert, setShowAlert] = useState(true);
 
     const navigate = useNavigate();
@@ -35,10 +38,6 @@ const SignInForm = () => {
         });
         setShowAlert(false)
     };
-
-    const handleReveal = () => {
-        setRevealed(!revealed)
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -83,17 +82,16 @@ const SignInForm = () => {
 
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type={(revealed) ? "text" : "password"} placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
+                            <div className="input-group">
+                                <Form.Control type={(revealPassword) ? "text" : "password"} placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
+                                <RevealPasswordButton state={revealPassword} setstate={setRevealPasswordValue} />
+                            </div>
                         </Form.Group>
                         {errors.password?.map((message, idx) => (
                             <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
                         ))}
-
-                        <Form.Group className='mb-3' controlId="signInCheckbox">
-                            <Form.Check type="checkbox" label="Show Password" onClick={handleReveal} />
-                        </Form.Group>
 
                         <div className="d-grid gap-2">
                             <Button variant="secondary" size="lg" type="submit">

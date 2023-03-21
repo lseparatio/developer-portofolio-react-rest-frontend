@@ -6,6 +6,7 @@ import Alert from 'react-bootstrap/Alert'
 import registerImage from "../../assets/img/register.webp"
 import styles from "../../styles/SignUp.module.css"
 import { Flip, toast } from 'react-toastify';
+import RevealPasswordButton from '../../shared/RevealPasswordButton';
 
 
 const SignUpForm = () => {
@@ -20,8 +21,11 @@ const SignUpForm = () => {
     const { username, email, first_name, last_name, password1, password2, } = signUpData;
 
     const [errors, setErrors] = useState({});
-    const [revealed, setRevealed] = useState(false);
     const [showAlert, setShowAlert] = useState(true);
+    /* Updated in RevealPasswordButton */
+    const [revealPassword1, setRevealPasswordValue1] = useState(false);
+    const [revealPassword2, setRevealPasswordValue2] = useState(false);
+    /* Updated in RevealPasswordButton */
 
     const navigate = useNavigate();
 
@@ -33,9 +37,7 @@ const SignUpForm = () => {
         setShowAlert(false)
     };
 
-    const handleReveal = () => {
-        setRevealed(!revealed)
-    }
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -123,10 +125,10 @@ const SignUpForm = () => {
 
                         <Form.Group className="mb-3" controlId="password1">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type={(revealed) ? "text" : "password"} placeholder="Password" name='password1' value={password1} onChange={handleChange} className={styles.Input} />
-                        </Form.Group>
-                        <Form.Group className='mb-3' controlId="signUpCheckbox">
-                            <Form.Check type="checkbox" label="Show Passwords" onClick={handleReveal} />
+                            <div className="input-group">
+                                <Form.Control type={(revealPassword1) ? "text" : "password"} placeholder="Password" name='password1' value={password1} onChange={handleChange} className={styles.Input} />
+                                <RevealPasswordButton state={revealPassword1} setstate={setRevealPasswordValue1} />
+                            </div>
                         </Form.Group>
                         {errors.password1?.map((message, idx) => (
                             <Alert show={showAlert} variant="warning" key={idx}>
@@ -136,7 +138,10 @@ const SignUpForm = () => {
 
                         <Form.Group className="mb-3" controlId="password2">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type={(revealed) ? "text" : "password"} placeholder="Confirm Password" name='password2' value={password2} onChange={handleChange} className={styles.Input} />
+                            <div className="input-group">
+                                <Form.Control type={(revealPassword2) ? "text" : "password"} placeholder="Confirm Password" name='password2' value={password2} onChange={handleChange} className={styles.Input} />
+                                <RevealPasswordButton state={revealPassword2} setstate={setRevealPasswordValue2} />
+                            </div>
                         </Form.Group>
                         {errors.password2?.map((message, idx) => (
                             <Alert show={showAlert} variant="warning" key={idx}>
