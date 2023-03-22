@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import Footer from './components/Footer';
+import Contact from './pages/Contact';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
           <Route exact path="/about" element={<h1>About</h1>} />
           <Route exact path="/projects" element={<h1>Projects</h1>} />
           <Route exact path="/blog" element={<h1>Blog</h1>} />
-          <Route exact path="/contact" element={<h1>Contact</h1>} />
+          <Route exact path="/contact" element={<Contact/>} />
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
           <Route exact path={`/profile/${username}`} element={<ProfileDisplay />} />

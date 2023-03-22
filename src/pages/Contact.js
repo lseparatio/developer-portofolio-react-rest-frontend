@@ -1,39 +1,35 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from 'react-bootstrap/Alert'
-import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+
 import { Col, Container, Row, Image } from 'react-bootstrap';
-import loginImage from "../../assets/img/login.webp"
-import styles from "../../styles/SignIn.module.css";
+import contactImage from "../assets/img/contact.png"
+import styles from "../styles/Contact.module.css";
 import { Flip, toast } from 'react-toastify';
-import RevealPasswordButton from '../../shared/RevealPasswordButton';
 
 
 
-const SignInForm = () => {
+const Contact = () => {
 
-    const setCurrentUser = useSetCurrentUser();
-    const setUser = setCurrentUser[0]
-    const [signInData, setSignInData] = useState({
+
+    const [contactData, setContactData] = useState({
+        full_name: "",
         email: "",
-        password: "",
+        sent_message: "",
     });
-    const { email, password, } = signInData;
 
+
+    const { full_name, email, sent_message, } = contactData;
     const [errors, setErrors] = useState({});
-    /* Updated in RevealPasswordButton */
-    const [revealPassword, setRevealPasswordValue] = useState(false);
-    /* Updated in RevealPasswordButton */
     const [showAlert, setShowAlert] = useState(true);
 
-    const navigate = useNavigate();
+
 
     const handleChange = (event) => {
-        setSignInData({
-            ...signInData,
+        setContactData({
+            ...contactData,
             [event.target.name]: event.target.value,
         });
         setShowAlert(false)
@@ -42,10 +38,9 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await axios.post("dj-rest-auth/login/", signInData);
-            setUser(data.user);
-            navigate(`/profile/${data.user.username}`);
-            toast.success('Your was sign in successfully!', {
+            await axios.post("contact/", contactData);
+
+            toast.success('Your message was successfully!', {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -65,11 +60,20 @@ const SignInForm = () => {
     return (
         <Container fluid className={styles.Container}>
             <Row className={styles.Row}>
-                <Col md={6}>
-                    <Image fluid src={loginImage} alt='Two persones filling a form'></Image>
-                </Col>
                 <Col md={6} className="d-flex align-items-center justify-content-center">
+                    <Image fluid src={contactImage} alt='Two persones filling a form'></Image>
+                </Col>
+                <Col md={6} className="align-items-center justify-content-center">
                     <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-4" controlId="full_name">
+                            <Form.Label>Full Name</Form.Label>
+                            <Form.Control type="text" placeholder="Full Name" name='full_name' value={full_name} onChange={handleChange} className={styles.Input} />
+                        </Form.Group>
+                        {errors.full_name?.map((message, idx) => (
+                            <Alert show={showAlert} variant="warning" key={idx}>
+                                {message}
+                            </Alert>
+                        ))}
                         <Form.Group className="mb-4" controlId="email">
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control type="email" placeholder="Enter Email" name='email' value={email} onChange={handleChange} className={styles.Input} />
@@ -80,14 +84,11 @@ const SignInForm = () => {
                             </Alert>
                         ))}
 
-                        <Form.Group className="mb-3" controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <div className="input-group">
-                                <Form.Control type={(revealPassword) ? "text" : "password"} placeholder="Password" name='password' value={password} onChange={handleChange} className={styles.Input} />
-                                <RevealPasswordButton state={revealPassword} setstate={setRevealPasswordValue} />
-                            </div>
+                        <Form.Group className="mb-3" controlId="sent_message">
+                            <Form.Label>Your Message</Form.Label>
+                            <Form.Control as="textarea" rows={4} placeholder="Your Message" name='sent_message' value={sent_message} onChange={handleChange} className={styles.Input} />
                         </Form.Group>
-                        {errors.password?.map((message, idx) => (
+                        {errors.sent_message?.map((message, idx) => (
                             <Alert show={showAlert} variant="warning" key={idx}>
                                 {message}
                             </Alert>
@@ -95,7 +96,7 @@ const SignInForm = () => {
 
                         <div className="d-grid gap-2">
                             <Button variant="secondary" size="lg" type="submit">
-                                Log In
+                                Send Message
                             </Button>
                         </div>
                         {errors.non_field_errors?.map((message, idx) => (
@@ -109,4 +110,4 @@ const SignInForm = () => {
         </Container>
     );
 }
-export default SignInForm;
+export default Contact;
