@@ -78,7 +78,7 @@ const SignUpForm = () => {
                 <Col md={6}>
                     <Image fluid src={registerImage} alt='Two persones filling a form'></Image>
                 </Col>
-                <Col md={6} className="d-flex align-items-center justify-content-center">
+                <Col md={6} className="align-items-center justify-content-center">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
                             <Form.Label>Username</Form.Label>
