@@ -1,0 +1,1 @@
+In this folder we will keep images only for the mails sent by backend as i son't want to serve any static files from backend.
