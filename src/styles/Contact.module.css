@@ -7,3 +7,9 @@
 .Container {
   margin-top: 4vh;
 }
+
+.SuccessP {
+  font-size: x-large;
+  text-align: center;
+  padding-top: 2vh;
+}
