@@ -49,7 +49,7 @@ const Contact = () => {
     const successImage = (
         <>
             <Image fluid src={contactSuccess} alt='Two persones filling a form' className={styles.ContactSucessImg}></Image>
-            <p className={styles.SuccessP}>Your message was successfully!</p>
+            <p className={styles.SuccessP}>Your message was sent successfully!</p>
         </>
 
     );

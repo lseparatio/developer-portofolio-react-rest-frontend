@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
+import EmailConfirmationValidation from './components/EmailConfirmationValidation';
 
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
       <Container className={styles.Main}>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          {/* This route is for email confirmation link validation and forwarding to django backend*/}
+          <Route exact path="/confirm-email/:key" element={<EmailConfirmationValidation/>} />
           <Route exact path="/about" element={<h1>About</h1>} />
           <Route exact path="/projects" element={<h1>Projects</h1>} />
           <Route exact path="/blog" element={<h1>Blog</h1>} />
