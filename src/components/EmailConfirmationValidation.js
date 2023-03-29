@@ -7,42 +7,48 @@ import AlertsBig from './AlertsBig';
 import styles from '../styles/EmailConfirmationValidation.module.css'
 
 const EmailConfirmationValidation = () => {
-    const [response, setResponse] = useState(100)
+    var [response, setResponse] = useState(100)
     const { key } = useParams();
     const [content, setConent] = useState(<AlertsBig variant="info" heading="Wellcome!" p="We are attempting to verify your email now!" />)
+    response = parseInt(response)
+
 
 
     useEffect(() => {
         const checkEmail = async () => {
             try {
                 const res = await axiosReq.post(`/accounts/confirm-email/${key}/`, { key });
-                const data = res.status;
+                const data = res.status.toString();
                 setResponse(data)
             } catch (err) {
                 if (err.response) {
-                    setResponse(err.response.status)
+                    setResponse(err.response.status.toString())
                 }
             }
+
         };
         checkEmail();
     }, [key]);
 
-    const linkToSignIn = (
-        <Link to="/signin"> Sign In now!</Link>
-    );
-
     useEffect(() => {
-        if (response === 100) {
-            setConent(<AlertsBig variant="info" heading="Wellcome!" p="We are attempting to verify your email now!" />)
-        } if (response === 200 || response === 304) {
+        const linkToSignIn = (
+            <Link to="/signin"> Sign In now!</Link>
+        );
+        const email = (
+            <a href="mailto:contact@ionutzapototchi.com">contact@ionutzapototchi.com</a>
+        );
+        if ((response >= 500) || (response !== 304 && response >= 300 && response <= 399)) {
+            setConent(<AlertsBig variant="danger" heading="Something went wrong with our servers!" p="Please contact us on: contact@ionutzapototchi.com try again latter or contact us on:" email={email} />)
+        } else if (response >= 400 && response <= 499) {
+            setConent(<AlertsBig variant="danger" heading="Something went wrong!" p="We was not able to verify your email address. Please contact us on:" email={email} />)
+        } else if (response === 304 || (response >= 200 && response <= 299)) {
             setConent(<AlertsBig variant="success" heading="Congratulation!" p="Your email was successfully verified! You can" signIn={linkToSignIn} />)
         } else {
-            setConent(<AlertsBig variant="danger" heading="Something went wrong!" p="We was not able to verify your email address. Please contact us on: contact@ionutzapototchi.com" />)
+            <AlertsBig variant="info" heading="Wellcome!" p="We are attempting to verify your email now!" />
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [response]);
 
-    console.log(response)
+
     return (
         <div className={styles.Div}>
             <Row className={styles.Row}>

@@ -7,9 +7,9 @@ const AlertsBig = (props) => {
 
     return (
         <Alert show={show} className={`text-center`} variant={props.variant} onClose={() => setShow(false)} dismissible>
-            <Alert.Heading className={`text-center`} center>{props.heading}</Alert.Heading>
+            <Alert.Heading className={`text-center`} >{props.heading}</Alert.Heading>
             <p>
-                {props.p}
+                {props.p} {props.email}
                 {props.signIn}
             </p>
         </Alert>
