@@ -1,0 +1,10 @@
+.Card {
+  margin-right: 1vh;
+  margin-left: 1vh;
+  margin-bottom: 3vh;
+}
+
+.CardImage {
+  height: 100%;
+  object-fit: cover;
+}
