@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useNavigate } from 'react-router-dom';
+import { logOut, removeTokenTimestamp, shouldRefreshToken, shouldUpdateUser } from '../utils/utils';
 
 const CurrentUserContext = createContext();
 const SetCurrentUserContext = createContext();
@@ -15,11 +16,13 @@ export const CurrentUserProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const handleMount = async () => {
-        try {
-            const { data } = await axiosRes.get("dj-rest-auth/user/");
-            setCurrentUser(data);
-        } catch (err) {
-            //console.log(err);
+        if (shouldUpdateUser()) {
+            try {
+                const { data } = await axiosRes.get("dj-rest-auth/user/");
+                setCurrentUser(data);
+            } catch (err) {
+                //console.log(err);
+            }
         }
     };
 
@@ -30,16 +33,20 @@ export const CurrentUserProvider = ({ children }) => {
     useMemo(() => {
         axiosReq.interceptors.request.use(
             async (config) => {
-                try {
-                    await axios.post("dj-rest-auth/token/refresh/");
-                } catch (err) {
-                    setCurrentUser((prevCurrentUser) => {
-                        if (prevCurrentUser) {
-                            navigate("/");
-                        }
-                        return null;
-                    });
-                    return config;
+                if (shouldRefreshToken()) {
+                    try {
+                        await axios.post("dj-rest-auth/token/refresh/");
+                    } catch (err) {
+                        setCurrentUser((prevCurrentUser) => {
+                            if (prevCurrentUser) {
+                                navigate("/");
+                            }
+                            return null;
+                        });
+                        removeTokenTimestamp();
+                        logOut();
+                        return config;
+                    }
                 }
                 return config;
             },
@@ -61,6 +68,8 @@ export const CurrentUserProvider = ({ children }) => {
                             }
                             return null;
                         });
+                        removeTokenTimestamp();
+                        logOut();
                     }
                     return axios(err.config);
                 }
@@ -78,7 +87,7 @@ export const CurrentUserProvider = ({ children }) => {
                     const { data } = await axiosReq.get(`/profiles/${currentUser?.profile_id}/`);
                     setProfileData(data);
                 } catch (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
             }
             fetchData()

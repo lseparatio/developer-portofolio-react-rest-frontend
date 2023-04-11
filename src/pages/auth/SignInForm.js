@@ -10,6 +10,7 @@ import loginImage from "../../assets/img/login.webp"
 import styles from "../../styles/SignIn.module.css";
 import { Flip, toast } from 'react-toastify';
 import RevealPasswordButton from '../../shared/RevealPasswordButton';
+import { isLogedIn, setTokenTimestamp } from '../../utils/utils';
 
 
 
@@ -44,6 +45,8 @@ const SignInForm = () => {
         try {
             const { data } = await axios.post("dj-rest-auth/login/", signInData);
             setUser(data.user);
+            setTokenTimestamp(data);
+            isLogedIn();
             navigate(`/profile/${data.user.username}`);
             toast.success('Your was sign in successfully!', {
                 position: "top-right",

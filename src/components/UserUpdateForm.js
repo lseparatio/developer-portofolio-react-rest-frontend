@@ -43,7 +43,7 @@ const UserUpdateForm = () => {
           const { pk, email, username, first_name, last_name, profile_id } = data;
           setUserData({ pk, email, username, first_name, last_name, profile_id });
         } catch (err) {
-          console.log(err);
+         // console.log(err);
           setErrors(err.response?.data);
         }
       } else {

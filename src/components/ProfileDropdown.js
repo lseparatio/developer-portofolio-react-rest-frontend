@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Flip, toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { logOut } from "../utils/utils";
 
 function ProfileDropdown() {
   const currentUser = useCurrentUser();
@@ -19,6 +20,7 @@ function ProfileDropdown() {
       await axios.post("dj-rest-auth/logout/");
       user(null);
       navigate("/signin");
+      logOut();
       toast.warn("Your was sign out successfully!", {
         position: "top-right",
         autoClose: 5000,
@@ -31,7 +33,7 @@ function ProfileDropdown() {
         theme: "light",
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -48,7 +50,7 @@ function ProfileDropdown() {
       >
         Profile
       </NavDropdown.Item>
-      <NavDropdown.Item className="text-center" href="#action/3.2">
+      <NavDropdown.Item as={Link} className="text-center" to={`/projects`}>
         Projects
       </NavDropdown.Item>
       <NavDropdown.Item className="text-center" href="#action/3.3">

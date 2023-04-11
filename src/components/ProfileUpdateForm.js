@@ -47,7 +47,7 @@ const ProfileUpdateForm = () => {
           const { id, user, birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, image } = data;
           setProfileData({ id, user, birth_date, phone_number, street_address1, street_address2, town_or_city, county, postcode, country, image });
         } catch (err) {
-          console.log(err);
+         // console.log(err);
         }
       } else {
         <Navigate to="*" replace={true} />
