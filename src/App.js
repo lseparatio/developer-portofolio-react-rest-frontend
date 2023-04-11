@@ -15,6 +15,9 @@ import Home from './pages/Home';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import EmailConfirmationValidation from './components/EmailConfirmationValidation';
+import ProjectDetail from './pages/ProjectDetail';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 function App() {
@@ -29,11 +32,12 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           {/* This route is for email confirmation link validation and forwarding to django backend*/}
-          <Route exact path="/confirm-email/:key" element={<EmailConfirmationValidation/>} />
+          <Route exact path="/confirm-email/:key" element={<EmailConfirmationValidation />} />
           <Route exact path="/about" element={<h1>About</h1>} />
           <Route exact path="/projects" element={<h1>Projects</h1>} />
+          <Route exact path="/project/:id" element={<ProjectDetail />} />
           <Route exact path="/blog" element={<h1>Blog</h1>} />
-          <Route exact path="/contact" element={<Contact/>} />
+          <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/signin" element={<SignInForm />} />
           <Route exact path="/signup" element={<SignUpForm />} />
           <Route exact path={`/profile/${username}`} element={<ProfileDisplay />} />

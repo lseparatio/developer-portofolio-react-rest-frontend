@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom'
@@ -25,7 +24,6 @@ const EmailConfirmationValidation = () => {
                     setResponse(err.response.status.toString())
                 }
             }
-
         };
         checkEmail();
     }, [key]);

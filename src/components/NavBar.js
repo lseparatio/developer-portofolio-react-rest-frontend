@@ -40,8 +40,9 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed='top'>
-      <Container >
+
+    <Navbar expanded={expanded} className={`container-fluid ${styles.NavBar}`} expand="md" fixed='top'>
+      <Container>
         <NavLink exact="true" className="nav-link" to="/">
           <Navbar.Brand>Ionut Zapototchi</Navbar.Brand>
         </NavLink>

@@ -1,0 +1,26 @@
+.Top {
+  padding-top: 2vh;
+  overflow: hidden;
+}
+
+.Card {
+  margin-right: 1vh;
+  margin-left: 1vh;
+}
+
+.Chevron {
+  font-size: 10vh;
+  color: white;
+  background-color: #414344;
+  border-radius: 50px;
+  border: 1px solid #414344;
+}
+
+.Left {
+  padding-right: 120px;
+}
+
+.CardImage {
+  height: 100%;
+  object-fit: cover;
+}

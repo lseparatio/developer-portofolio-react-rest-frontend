@@ -67,3 +67,11 @@ input#signUpCheckbox.form-check-input:focus {
 .accordion-body {
   border-left: #6c757d 2px solid;
 }
+
+/* Utility to check for overflows
+
+
+* {
+  outline: solid 1px red;
+}
+*/
