@@ -83,7 +83,7 @@ export default class ProjectsPresentationCarousel extends Component {
                                 this.state.projects.map((project) =>
                                     <div key={project.id} className={`d-flex align-items-center justify-content-center text-center`}>
                                         <Card style={{ width: '100%', height: '100%' }} className={styles.Card}>
-                                            <Card.Img variant="top" src={project.project_image.replace('http://', 'https://')} loading="lazy" className={styles.CardImage} alt={project.project_name} />
+                                            {project?.project_image ? (<Card.Img variant="top" src={project.project_image.replace('http://', 'https://')} loading="lazy" className={styles.CardImage} alt={project.project_name} />) : (<Card.Text>No image currently available!</Card.Text>)}
                                             <Card.Body>
                                                 <Card.Title>{project.project_name}</Card.Title>
                                                 <Card.Text>

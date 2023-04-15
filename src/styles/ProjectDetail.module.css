@@ -1,0 +1,12 @@
+.Readme {
+    padding-top: 4vh;
+}
+
+.Readme img {
+    width: 90vw;
+    object-fit: scale-down;
+}
+
+.Readme H1 {
+    text-align: center;
+}

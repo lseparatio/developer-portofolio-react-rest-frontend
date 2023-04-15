@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Flip, toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { logOut } from "../utils/utils";
+import { logOut, removeTokenTimestamp } from "../utils/utils";
 
 function ProfileDropdown() {
   const currentUser = useCurrentUser();
@@ -20,6 +20,7 @@ function ProfileDropdown() {
       await axios.post("dj-rest-auth/logout/");
       user(null);
       navigate("/signin");
+      removeTokenTimestamp();
       logOut();
       toast.warn("Your was sign out successfully!", {
         position: "top-right",
