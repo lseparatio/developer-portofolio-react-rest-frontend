@@ -6,6 +6,8 @@ import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import styles from '../styles/ProjectDetail.module.css'
+import LoadingAnimation from '../utils/LoadingAnimation';
+
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -14,20 +16,24 @@ const ProjectDetail = () => {
   const [readme, setReadme] = useState();
   const [gitHubProjectUsername, setGitHubProjectUsername] = useState();
   const [gitHubProjectName, setGitHubProjectName] = useState();
-  //console.log(project, gitHubProjectUrl, gitHubProjectUsername, gitHubProjectName)
+  const [readmeError, setReadmeError] = useState(false)
 
+  /*
+   Checking if there is a GitHub link. If is we show loading... if not we show: no readme found.
+   And if is a link but for any reason we cant fetch him and get data we show No Readme Found.
+  */
+  const loadingOrError = readmeError ? (<p className={`d-flex align-items-center justify-content-center `}>No Readme Found</p>) : (project?.project_github_link ? (<LoadingAnimation />) : (<p className={`d-flex align-items-center justify-content-center `}>No Readme Found</p>))
 
   const githubReadme = async () => {
     try {
       const { data } = await axiosReq.get(`https://raw.githubusercontent.com/${gitHubProjectUsername}/${gitHubProjectName}/main/README.md`, { withCredentials: false });
       setReadme(data);
     } catch (err) {
+      setReadmeError(true)
       //console.log(err);
     }
   };
-  if (project) {
-    githubReadme();
-  }
+
 
   useEffect(() => {
     const handleMount = async () => {
@@ -43,9 +49,12 @@ const ProjectDetail = () => {
     };
     handleMount();
 
-
   }, [id]);
 
+
+  if (project?.project_github_link) {
+    githubReadme();
+  }
 
   return (
     <>
@@ -60,15 +69,18 @@ const ProjectDetail = () => {
           {project?.project_image ? (<Image fluid rounded src={project?.project_image.replace('http://', 'https://')} loading="lazy" alt={project.project_name}></Image>) : (<p>No image currently available!</p>)}
         </Col>
       </Row>
-
       <Row>
-        <Col md={12} className={styles.Readme}>
-          {readme ? (<ReactMarkdown rehypePlugins={[rehypeHighlight, rehypeRaw]} transformImageUri={uri =>
-            uri.startsWith("https") ? uri : `https://raw.githubusercontent.com/${gitHubProjectUsername}/${gitHubProjectName}/main/${uri}`
-          }>{readme}</ReactMarkdown>) : (<p>No readme found</p>)}
+        <Col className={`d-flex align-items-center justify-content-center `}>
+
         </Col>
       </Row>
-
+      <Row>
+        <Col md={12} className={` align-items-center justify-content-center ${styles.Readme} `}>
+          {readme ? (<ReactMarkdown rehypePlugins={[rehypeHighlight, rehypeRaw]} transformImageUri={uri =>
+            uri.startsWith("https") ? uri : `https://raw.githubusercontent.com/${gitHubProjectUsername}/${gitHubProjectName}/main/${uri}`
+          }>{readme}</ReactMarkdown>) : (loadingOrError)}
+        </Col>
+      </Row>
     </>
   )
 }

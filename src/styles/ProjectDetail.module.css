@@ -2,9 +2,10 @@
     padding-top: 4vh;
 }
 
-.Readme img {
-    width: 90vw;
+.Readme * {
+    width: 80vw;
     object-fit: scale-down;
+    word-wrap: break-word;
 }
 
 .Readme H1 {
