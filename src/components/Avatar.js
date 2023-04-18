@@ -6,7 +6,7 @@ function Avatar({ src, height = 30 }) {
     <span>
       <img
         className={styles.Avatar}
-        src={src}
+        src={src.replace('http://', 'https://')}
         height={height}
         width={height}
         alt="avatar"

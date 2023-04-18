@@ -105,7 +105,7 @@ function ProfileImageModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='mx-auto'>
-        <Image fluid src={profileData.image} className={styles.Avatar} alt='Profile Image' ></Image>
+        <Image fluid src={profileData.image.replace('http://', 'https://')} className={styles.Avatar} alt='Profile Image' ></Image>
         <Form id='uploadProfileImage'>
           <Form.Group controlId="formFileLg" className="mb-3">
             <Form.Label className="ms-auto">Upload new picture</Form.Label>

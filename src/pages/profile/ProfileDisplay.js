@@ -29,7 +29,7 @@ const ProfileDisplay = () => {
           <div className={styles.ContainerImage}>
             <Image
               fluid
-              src={profile?.image}
+              src={profile?.image.replace('http://', 'https://')}
               alt="Profile Image"
               className={styles.Image}
             ></Image>
