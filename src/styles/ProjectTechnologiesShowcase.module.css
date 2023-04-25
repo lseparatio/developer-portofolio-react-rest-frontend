@@ -1,0 +1,57 @@
+.MainRow {
+    margin-top: 4vh;
+    border: 1px solid #414344;
+    border-radius: 25px;
+}
+
+.ProjectOverviev {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    font-size: xx-large;
+    font-weight: 800;
+    text-align: center;
+    border-bottom: 1px solid #414344;
+}
+
+.FirstColSecondRow {
+    font-size: x-large;
+    font-weight: 500;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+}
+
+.SecondColSecondRow {
+    font-size: x-large;
+    font-weight: 500;
+    border-left: 1px solid #414344;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+}
+
+.GreenCheck {
+    max-height: 3vh;
+    object-fit: contain;
+}
+
+.RedCheck {
+    max-height: 3vh;
+    object-fit: contain;
+}
+
+.Punderline {
+    border-bottom: 1px solid #414344;
+}
+
+.ProjectLinks{
+    font-size: xx-large;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #414344;
+    border-top: 1px solid #414344;
+}
+
+.LinksP {
+    font-size: x-large;
+    font-weight: 500;
+    text-align: center;
+}

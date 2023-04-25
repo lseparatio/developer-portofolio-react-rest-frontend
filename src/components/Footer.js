@@ -6,7 +6,7 @@ import { faLinkedin, faFacebook, faSkype, faGithubSquare } from "@fortawesome/fr
 import { faDownload, faPhoneSquare } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
-import CV from '../assets/downloads/cv.pdf'
+import CV from '../assets/downloads/01IonutZapototchiCV.pdf'
 
 const Footer = () => {
     return (
