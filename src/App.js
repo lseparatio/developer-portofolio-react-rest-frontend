@@ -3,8 +3,8 @@ import styles from './App.module.css';
 import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
 import './api/axiosDefaults'
-import SignInForm from './pages/auth/SignInForm';
-import SignUpForm from './pages/auth/SignUpForm';
+//import SignInForm from './pages/auth/SignInForm';
+//import SignUpForm from './pages/auth/SignUpForm';
 import NotFound from './components/NotFound';
 import ProfileDisplay from './pages/profile/ProfileDisplay';
 import ProfileUpdate from './pages/profile/ProfileUpdate';
@@ -33,14 +33,15 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           {/* This route is for email confirmation link validation and forwarding to django backend*/}
+          {/* Commenteded routes are routes that will be added latter*/}
           <Route exact path="/confirm-email/:key" element={<EmailConfirmationValidation />} />
           <Route exact path="/about" element={<h1>About</h1>} />
           <Route exact path="/projects" element={<AllProjects />} />
           <Route exact path="/project/:id" element={<ProjectDetail />} />
-          <Route exact path="/blog" element={<h1>Blog</h1>} />
+          {/*<Route exact path="/blog" element={<h1>Blog</h1>} />*/}
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/signin" element={<SignInForm />} />
-          <Route exact path="/signup" element={<SignUpForm />} />
+          {/*<Route exact path="/signin" element={<SignInForm />} />*/}
+          {/*<Route exact path="/signup" element={<SignUpForm />} />*/}
           <Route exact path={`/profile/${username}`} element={<ProfileDisplay />} />
           <Route exact path={`/profile/update/${id}`} element={<ProfileUpdate />} />
           {/* 404 rounte */}

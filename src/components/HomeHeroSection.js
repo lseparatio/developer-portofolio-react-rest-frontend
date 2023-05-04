@@ -27,16 +27,16 @@ const HomeHeroSection = () => {
 
                     <Row>
                         <Col className={`d-flex align-items-center justify-content-center`}>
-                            <NavLink to="/signup">
+                            <NavLink to="/contact">
                                 <Button variant='secondary' className={styles.Button}>HIRE ME NOW</Button>
                             </NavLink>
                         </Col>
                     </Row>
-                </Col >
+                </Col>
                 <Col md={5} sm={12} className="d-flex align-items-center justify-content-center">
                     <Image rounded fluid={true} src={heroImage} className={styles.Image} alt="Ionut Zapototchi profile image"></Image>
                 </Col>
-            </Row >
+            </Row>
         </Container>
     )
 };
